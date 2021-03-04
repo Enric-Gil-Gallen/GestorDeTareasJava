@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("Bienvedo al gestor que tareas");
         System.out.println("Eliga una opción introduciendo el numero");
         Scanner in = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class Main {
                         "10 -Tarea finalizada o no\n" +
                         "11 -Resultado de la tarea");
 
-        while (num < 1 && num > 11){
+        while (num > 1 && num < 11){
             num = leer(in);
         }
         in.close();
@@ -32,7 +32,7 @@ public class Main {
         switch (num) {
 
             case 1:
-                // Declaraciones
+                System.out.println("Soy el 1 ---------------");
                 break;
 
             case 2:
@@ -77,7 +77,8 @@ public class Main {
         }
 
     }
-    public int leer (Scanner in){
+
+    public static int leer(Scanner in){
         while (true){
             try {
                 return in.nextInt();
