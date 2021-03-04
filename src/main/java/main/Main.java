@@ -24,8 +24,15 @@ public class Main {
                         "10 -Tarea finalizada o no\n" +
                         "11 -Resultado de la tarea");
 
-        while (num > 1 && num < 11){
+        boolean f = true;
+        while (f){
             num = leer(in);
+            if (num >= 1 && num <= 11){
+                f =false;
+            }
+            else {
+                System.out.println("El numero deve estar entre 1 y 11");
+            }
         }
         in.close();
 
@@ -76,6 +83,7 @@ public class Main {
                 break;
         }
 
+        System.out.println("Gracias por su uso");
     }
 
     public static int leer(Scanner in){
