@@ -4,8 +4,6 @@ public class Resultado {
     int id;
     double horas_totola;
     Enum tipo_Int_Ext;
-    // Interno == true
-    // Externo == false
     String lenguaje;
 
     public Resultado(int id, double horas_totola, Enum tipo_Int_Ext, String lenguaje) {
