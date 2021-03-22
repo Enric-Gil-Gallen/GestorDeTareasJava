@@ -28,38 +28,44 @@ public class Main {
         boolean numero_correcto = true;
 
         while (numero_correcto){
-            opcion = leer(scaner);
+            opcion = leer(scaner); // Comprobamos que sea un numero lo que nos pasan
 
             if (opcion >= 1 && opcion <= menu.values().length){
                 menu opcionMenu = menu.getOpcion(opcion);
-                numero_correcto = false;
 
                 // Necesario para poder usar el swicht
                 opcion  = opcionMenu.ordinal();
+
+                numero_correcto = false;
+
             }
             else {
                 System.out.println("La opción: " + opcion + " no existe, prueve otra vez. \n" +
                         "Recuerde numero debe estar entre 1 y " + menu.values().length );
-
-                opcion = scaner.nextInt();
             }
         }
 
-        // Cerar el Scaner
-        scaner.close();
+
 
         switch (opcion) {
 
-            case 1:
-                System.out.println("¿ Cual va a ser el nombre del proyecto ? \\n " );
-                Scanner reader = new Scanner(System.in);
-                String nombre_proyecto = reader.next();
+            case 1: // FALLO CON EL SCANNER
+                System.out.println("¿ Cual va a ser el nombre del proyecto ? \n " );
+                String nombre_proyecto = scaner.nextLine();  // FALLO CON EL SCANNER
                 Proyecto proyecto = new Proyecto(nombre_proyecto,null,null,null,0,null,null,null,null,null);
                 proyectos.add(proyecto);
                 break;
 
-            case 2:
-                // Declaraciones
+            case 2: // FALLO CON EL SCANNER
+                System.out.println("¿ Cual es el nombre del proyecto ? \n " );
+                String nombre = scaner.nextLine();  // FALLO CON EL SCANNER
+                Proyecto actual = buscar_por_titulo(nombre);
+                if (actual != null){
+                    personas.addAll(actual.getPersonas());
+                }
+                else {
+                    System.out.println("El titulo es incorrecto o la lista de proyectos esta vacia.");
+                }
                 break;
 
             case 3:
@@ -100,6 +106,9 @@ public class Main {
         }
 
         System.out.println("Gracias por su uso");
+
+        // Cerar el Scaner
+        scaner.close();
     }
 
     public static int leer(Scanner in){
@@ -111,5 +120,17 @@ public class Main {
                 System.out.println("El numero no es correcto prueba, otra vez por favor ");
             }
         }
+    }
+
+    // Busacar proyecto por nombre
+    public static Proyecto buscar_por_titulo(String titulo){
+        if (!proyectos.isEmpty()){
+            for (int i = 0; i < proyectos.size(); i++){
+                if (proyectos.get(i).getTitulo().equals(titulo)){
+                    return proyectos.get(i);
+                }
+            }
+        }
+        return null;
     }
 }

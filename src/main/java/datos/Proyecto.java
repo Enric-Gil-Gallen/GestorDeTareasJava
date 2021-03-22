@@ -27,4 +27,43 @@ public class Proyecto {
         this.etiquetas = etiquetas;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public LinkedList<Persona> getPersonas() {
+        return Personas;
+    }
+
+    public Persona getResponsable_Tarea() {
+        return responsable_Tarea;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public String getFecha_Creacion() {
+        return fecha_Creacion;
+    }
+
+    public String getFecha_Finalizacion() {
+        return fecha_Finalizacion;
+    }
+
+    public Boolean getTarea_Finalizada() {
+        return tarea_Finalizada;
+    }
+
+    public Resultado getResultado_Esperado() {
+        return resultado_Esperado;
+    }
+
+    public LinkedList getEtiquetas() {
+        return etiquetas;
+    }
 }
