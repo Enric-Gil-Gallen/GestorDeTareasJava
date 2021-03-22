@@ -3,6 +3,7 @@ package main;
 import datos.Persona;
 import datos.Proyecto;
 import datos.Resultado;
+import datos.enums.menu;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -16,37 +17,38 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Bienvedo al gestor que tareas");
-        System.out.println("Eliga una opción introduciendo el numero");
-        Scanner in = new Scanner(System.in);
-        int num  = 0;
-        System.out.println(
-                "1 -Iniciar un  nuevo proyecto y darle nombre\n" +
-                        "2 -Dar de alta a las personas que trabajan en el proyecto\n" +
-                        "3 -Dar de alta las tareas con sus datos\n" +
-                        "4 -Marcar una tarea como finalizada\n" +
-                        "5 -Introducir o eliminar una persona de una tarea\n" +
-                        "6 -Listar las personas asignadas a un proyecto\n" +
-                        "7 -Listar las tareas de un proyecto:"
-        );
-        System.out.println(
-                "8 -Titulo de la Tarea\n" +
-                        "9 -Las personas asignadas a la tarea\n" +
-                        "10 -Tarea finalizada o no\n" +
-                        "11 -Resultado de la tarea");
+        System.out.println("Eliga una opción introduciendo el numero \n");
 
-        boolean f = true;
-        while (f){
-            num = leer(in);
-            if (num >= 1 && num <= 11){
-                f =false;
+        // Llamadas en Enum --> menu
+        System.out.println(menu.getMenu());
+        Scanner scaner = new Scanner(System.in);
+        int opcion = 0;
+
+        // Comprobar que el numero sea el indicado
+        boolean numero_correcto = true;
+
+        while (numero_correcto){
+            opcion = leer(scaner);
+
+            if (opcion >= 1 && opcion <= menu.values().length){
+                menu opcionMenu = menu.getOpcion(opcion);
+                numero_correcto = false;
+
+                // Necesario para poder usar el swicht
+                opcion  = opcionMenu.ordinal();
             }
             else {
-                System.out.println("El numero deve estar entre 1 y 11");
+                System.out.println("La opción: " + opcion + " no existe, prueve otra vez. \n" +
+                        "Recuerde numero debe estar entre 1 y " + menu.values().length );
+
+                opcion = scaner.nextInt();
             }
         }
-        in.close();
 
-        switch (num) {
+        // Cerar el Scaner
+        scaner.close();
+
+        switch (opcion) {
 
             case 1:
                 System.out.println("¿ Cual va a ser el nombre del proyecto ? \\n " );
