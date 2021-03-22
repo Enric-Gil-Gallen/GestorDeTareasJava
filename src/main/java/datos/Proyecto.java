@@ -16,9 +16,6 @@ public class Proyecto {
 
     public Proyecto(String nombre) {
         this.nombre = nombre;
-        this.personas = new LinkedList<>();
-        this.tareas = new LinkedList<>();;
-        this.resultados = new LinkedList<>();;
     }
 
     public LinkedList<Persona> getPersonas() {
@@ -37,37 +34,56 @@ public class Proyecto {
         boolean activo = true;
         while (activo){
             Scanner scaner = new Scanner(System.in);
-            System.out.println(" ¿Que quieres hacer introducir  \n " +
-                    "1 - Introducir persona" +
-                    "2 - Finalizar" );
-            if (scaner.equals(1)){
+            System.out.println(" ¿Que quieres hacer ?\n" +
+                    "\t1 - Introducir persona \n" +
+                    "\tCualquier otra tecla - Finalizar" );
+            String num = scaner.nextLine();
+            try{
+                if (Integer.parseInt(num) == 1){
+                    // Hay que comprobar que el nombre no este repetido
+                    boolean nombre_no_repe = true;
+                    String email = "";
 
-                // Hay que comprobar que el nombre no este repetido
-                boolean nombre_no_repe = true;
-                System.out.println("Email: " );
-                String email = scaner.nextLine();  // FALLO CON EL SCANNER
-                while (nombre_no_repe){
-                    nombre_no_repe = false;
-                    for (int i = 0; i < personas.size(); i++){
-                        if (personas.get(i).getEmail().equals(email)){
-                            nombre_no_repe = true;
+                    while (nombre_no_repe){
+                        System.out.println("Email: " );
+                        email = scaner.nextLine();
+                        nombre_no_repe = false;
+
+                        if (personas.size() != 0){
+                            for (int i = 0; i < personas.size(); i++){
+                                System.out.println(personas.get(i).getEmail() + "   ssssssssssssss");
+                                if (personas.get(i).getEmail().equals(email) && personas.get(i).getEmail() != "" ){
+                                    nombre_no_repe = true;
+                                }
+                            }
+
+                            if (nombre_no_repe){
+                                System.out.println("Este email ya esta registrado, porfavor pruebe otro.\n\n");
+                            }
+
+                        }
+                        else {
+                            nombre_no_repe = false;
                         }
                     }
-                    if (nombre_no_repe == false){
-                        System.out.println("Este email ya esta registrado, porfavor pruebe otro.");
-                    }
+
+                    System.out.println("Nombre: " );
+                    String nombre = scaner.nextLine();
+
+                    Persona persona = new Persona(nombre,email);
+                    personas.add(persona);
                 }
-
-                System.out.println("Nombre: " );
-                String nombre = scaner.nextLine();  // FALLO CON EL SCANNER
-
-                Persona persona = new Persona(nombre,email);
-                personas.add(persona);
+                else {
+                    activo = false;
+                    scaner.close();
+                    break;
+                }
             }
-            else {
+            catch (NumberFormatException e){
                 activo = false;
+                scaner.close();
+                break;
             }
-            scaner.close();
         }
     }
 }
