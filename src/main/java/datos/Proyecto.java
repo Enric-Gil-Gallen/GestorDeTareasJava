@@ -26,4 +26,5 @@ public class Proyecto {
         this.resultado_Esperado = resultado_Esperado;
         this.etiquetas = etiquetas;
     }
+
 }

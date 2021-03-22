@@ -1,4 +1,4 @@
-package datos.resultados.enums;
+package datos.enums;
 
 public enum estado {
     ESTATICA("Estatica"),

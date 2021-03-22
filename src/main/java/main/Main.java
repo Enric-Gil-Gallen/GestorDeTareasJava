@@ -1,9 +1,19 @@
 package main;
 
+import datos.Persona;
+import datos.Proyecto;
+import datos.Resultado;
+
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
+    // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
+    static LinkedList<Persona> personas = new LinkedList();
+    static LinkedList<Proyecto> proyectos = new LinkedList();
+    static LinkedList<Resultado> resultados = new LinkedList();
+
     public static void main(String[] args) {
         System.out.println("Bienvedo al gestor que tareas");
         System.out.println("Eliga una opción introduciendo el numero");
@@ -39,7 +49,11 @@ public class Main {
         switch (num) {
 
             case 1:
-                System.out.println("Soy el 1 ---------------");
+                System.out.println("¿ Cual va a ser el nombre del proyecto ? \\n " );
+                Scanner reader = new Scanner(System.in);
+                String nombre_proyecto = reader.next();
+                Proyecto proyecto = new Proyecto(nombre_proyecto,null,null,null,0,null,null,null,null,null);
+                proyectos.add(proyecto);
                 break;
 
             case 2:

@@ -1,4 +1,4 @@
-package datos.resultados.enums;
+package datos.enums;
 
 public enum tipo_Int_Ext {
     INTERNO("Interno"),
