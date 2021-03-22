@@ -14,6 +14,12 @@ public class Persona {
         this.tareas_lista = tareas_lista;
     }
 
+    public Persona(String nombre, String email) {
+        this.nombre = nombre;
+        this.email = email;
+        this.tareas_lista = new LinkedList<>();
+    }
+
     public String getNombre() {
         return nombre;
     }

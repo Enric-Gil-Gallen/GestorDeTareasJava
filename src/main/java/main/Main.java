@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    static Proyecto proyecto = new Proyecto("");
-
     public static void main(String[] args) {
         System.out.println("Bienvedo al gestor que tareas");
         System.out.println("Eliga una opción introduciendo el numero \n");
@@ -51,25 +49,15 @@ public class Main {
             case 1: // FALLO CON EL SCANNER
                 System.out.println("¿ Cual va a ser el nombre del proyecto ? \n " );
                 String nombre_proyecto = scaner.nextLine();  // FALLO CON EL SCANNER
-                proyecto = new Proyecto(nombre_proyecto);
+                Proyecto proyecto = new Proyecto("nombre_proyecto");
                 break;
 
             case 2: // FALLO CON EL SCANNER
-                boolean activo = true;
-                while (activo){
-                    System.out.println(" ¿Que quieres hacer introducir  \n " +
-                            "1 - Introducir persona" +
-                            "2 - Finalizar" );
-
-                }
-                System.out.println("  \n " );
-                String nombre = scaner.nextLine();  // FALLO CON EL SCANNER
-                Tarea actual = buscar_Proyecto_por_titulo(nombre);
-                if (actual != null){
-                    proyecto.getPersonas().addAll(actual.getPersonas());
+                if (proyecto != null){
+                    proyecto.añadirPersonas();
                 }
                 else {
-                    System.out.println("El titulo es incorrecto o la lista de proyectos esta vacia.");
+                    System.out.println("Recuerda antes de hacer alguna operacion, que primero tienes que crear el proyecto.");
                 }
                 break;
 
