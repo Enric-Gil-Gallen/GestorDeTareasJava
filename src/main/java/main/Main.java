@@ -55,7 +55,14 @@ public class Main {
                 break;
 
             case 2: // FALLO CON EL SCANNER
-                System.out.println("¿ Cual es el nombre del proyecto ? \n " );
+                boolean activo = true;
+                while (activo){
+                    System.out.println(" ¿Que quieres hacer introducir  \n " +
+                            "1 - Introducir persona" +
+                            "2 - Finalizar" );
+
+                }
+                System.out.println("  \n " );
                 String nombre = scaner.nextLine();  // FALLO CON EL SCANNER
                 Tarea actual = buscar_Proyecto_por_titulo(nombre);
                 if (actual != null){
