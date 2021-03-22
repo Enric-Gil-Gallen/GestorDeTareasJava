@@ -1,69 +1,34 @@
 package datos;
 
+import datos.Persona;
+import datos.Resultado;
+import datos.Tarea;
+
 import java.util.LinkedList;
 
 public class Proyecto {
-    String titulo;
-    String descripcion;
-    LinkedList<Persona> Personas;
-    Persona responsable_Tarea;
-    int prioridad;
-    String fecha_Creacion;
-    String fecha_Finalizacion;
-    Boolean tarea_Finalizada;
-    Resultado resultado_Esperado;
-    LinkedList etiquetas;
+    // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
+    LinkedList<Persona> personas = new LinkedList();
+    LinkedList<Tarea> tareas = new LinkedList();
+    LinkedList<Resultado> resultados = new LinkedList();
+    String nombre;
 
-    public Proyecto(String titulo, String descripcion, LinkedList<Persona> personas, Persona responsable_Tarea, int prioridad, String fecha_Creacion, String fecha_Finalizacion, Boolean tarea_Finalizada, Resultado resultado_Esperado, LinkedList etiquetas) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        Personas = personas;
-        this.responsable_Tarea = responsable_Tarea;
-        this.prioridad = prioridad;
-        this.fecha_Creacion = fecha_Creacion;
-        this.fecha_Finalizacion = fecha_Finalizacion;
-        this.tarea_Finalizada = tarea_Finalizada;
-        this.resultado_Esperado = resultado_Esperado;
-        this.etiquetas = etiquetas;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
+    public Proyecto(String nombre) {
+        this.nombre = nombre;
+        this.personas = new LinkedList<>();
+        this.tareas = new LinkedList<>();;
+        this.resultados = new LinkedList<>();;
     }
 
     public LinkedList<Persona> getPersonas() {
-        return Personas;
+        return personas;
     }
 
-    public Persona getResponsable_Tarea() {
-        return responsable_Tarea;
+    public LinkedList<Tarea> getTareas() {
+        return tareas;
     }
 
-    public int getPrioridad() {
-        return prioridad;
-    }
-
-    public String getFecha_Creacion() {
-        return fecha_Creacion;
-    }
-
-    public String getFecha_Finalizacion() {
-        return fecha_Finalizacion;
-    }
-
-    public Boolean getTarea_Finalizada() {
-        return tarea_Finalizada;
-    }
-
-    public Resultado getResultado_Esperado() {
-        return resultado_Esperado;
-    }
-
-    public LinkedList getEtiquetas() {
-        return etiquetas;
+    public LinkedList<Resultado> getResultados() {
+        return resultados;
     }
 }

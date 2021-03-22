@@ -2,6 +2,7 @@ package main;
 
 import datos.Persona;
 import datos.Proyecto;
+import datos.Tarea;
 import datos.Resultado;
 import datos.enums.menu;
 
@@ -10,10 +11,8 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
-    // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
-    static LinkedList<Persona> personas = new LinkedList();
-    static LinkedList<Proyecto> proyectos = new LinkedList();
-    static LinkedList<Resultado> resultados = new LinkedList();
+
+    static Proyecto proyecto = new Proyecto("");
 
     public static void main(String[] args) {
         System.out.println("Bienvedo al gestor que tareas");
@@ -52,16 +51,15 @@ public class Main {
             case 1: // FALLO CON EL SCANNER
                 System.out.println("¿ Cual va a ser el nombre del proyecto ? \n " );
                 String nombre_proyecto = scaner.nextLine();  // FALLO CON EL SCANNER
-                Proyecto proyecto = new Proyecto(nombre_proyecto,null,null,null,0,null,null,null,null,null);
-                proyectos.add(proyecto);
+                proyecto = new Proyecto(nombre_proyecto);
                 break;
 
             case 2: // FALLO CON EL SCANNER
                 System.out.println("¿ Cual es el nombre del proyecto ? \n " );
                 String nombre = scaner.nextLine();  // FALLO CON EL SCANNER
-                Proyecto actual = buscar_por_titulo(nombre);
+                Tarea actual = buscar_Proyecto_por_titulo(nombre);
                 if (actual != null){
-                    personas.addAll(actual.getPersonas());
+                    proyecto.getPersonas().addAll(actual.getPersonas());
                 }
                 else {
                     System.out.println("El titulo es incorrecto o la lista de proyectos esta vacia.");
@@ -122,12 +120,26 @@ public class Main {
         }
     }
 
-    // Busacar proyecto por nombre
-    public static Proyecto buscar_por_titulo(String titulo){
-        if (!proyectos.isEmpty()){
-            for (int i = 0; i < proyectos.size(); i++){
-                if (proyectos.get(i).getTitulo().equals(titulo)){
-                    return proyectos.get(i);
+    //SE PUEDEN HACER GENERICOS LOS 2 METODOS DE BUSCAR ??????
+
+    // Busacar tarea por titulo
+    public static Tarea buscar_Proyecto_por_titulo(String titulo){
+        if (!proyecto.getTareas().isEmpty()){
+            for (int i = 0; i < proyecto.getTareas().size(); i++){
+                if (proyecto.getTareas().get(i).getTitulo().equals(titulo)){
+                    return proyecto.getTareas().get(i);
+                }
+            }
+        }
+        return null;
+    }
+
+    // Busacar persona por nombre
+    public static Persona buscar_Persona_por_nobre(String nombre){
+        if (!proyecto.getPersonas().isEmpty()){
+            for (int i = 0; i < proyecto.getPersonas().size(); i++){
+                if (proyecto.getPersonas().get(i).getNombre().equals(nombre)){
+                    return proyecto.getPersonas().get(i);
                 }
             }
         }

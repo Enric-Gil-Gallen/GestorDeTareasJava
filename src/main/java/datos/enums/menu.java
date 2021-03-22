@@ -1,7 +1,7 @@
 package datos.enums;
 
 public enum menu {
-    NUEVO_PROYECTO_CON_NOMBRE("Iniciar un  nuevo proyecto y darle nombre"),
+    NUEVO_PROYECTO_CON_NOMBRE("Iniciar un nuevo proyecto y darle nombre"),
     PERSONAS_EN_PROYECTO("Dar de alta a las personas que trabajan en el proyecto"),
     TAREAS_CON_DATOS("Dar de alta las tareas con sus datos"),
     FINALIZAR_TAREAS("Marcar una tarea como finalizada"),
