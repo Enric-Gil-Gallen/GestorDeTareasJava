@@ -12,6 +12,9 @@ import java.util.Scanner;
 
 public class Main {
     static Proyecto proyecto = new Proyecto("ejem");
+    static Persona persona;
+    static Tarea tarea;
+
     public static void main(String[] args) {
         System.out.println("Bienvedo al gestor que tareas");
         System.out.println("Eliga una opción introduciendo el numero \n");
@@ -25,18 +28,18 @@ public class Main {
             switch (opcion+1) {
 
                 case 1: // FALLO CON EL SCANNER
-                    System.out.println("¿ Cual va a ser el nombre del proyecto ? \n " );
+                    System.out.println("¿ Cual va a ser el nombre del proyecto ?" );
                     scaner = new Scanner(System.in);
                     String nombre_proyecto = scaner.nextLine();
                     proyecto = new Proyecto(nombre_proyecto);
                     break;
 
                 case 2: // FALLO CON EL SCANNER
-                    proyecto.añadirPersonas();
+                    persona.añadirPersonas(proyecto);
                     break;
 
                 case 3:
-                    // Declaraciones
+                    tarea.añadirTareas(proyecto);
                     break;
 
                 case 4:
@@ -54,8 +57,8 @@ public class Main {
                 case 7:
                     salir = false;
                     break;
-
             }
+            System.out.println("\n");
         }
 
         System.out.println("Gracias por su uso");
@@ -65,6 +68,7 @@ public class Main {
     public static int leer(Scanner in){
         while (true){
             try {
+                System.out.println("Falla la recursividad del menu, todavia no se como solucionarlo");
                 return in.nextInt();
             }catch (InputMismatchException e){
                 in.nextLine(); // Es necesario porque sino a el programa no le da tiempo a leer es "nextDouble"
