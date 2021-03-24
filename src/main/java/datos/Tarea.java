@@ -8,7 +8,7 @@ public class Tarea {
     String descripcion;
     LinkedList<Persona> Personas;
     Persona responsable_Tarea;
-    int prioridad;
+    int prioridad; // Entre 1: muy baja, y 5: muy alta
     Fecha fecha_Creacion;
     Fecha fecha_Finalizacion;
     Boolean tarea_Finalizada;

@@ -38,6 +38,15 @@ public class Proyecto {
         return resul;
     }
 
+    public boolean numeroEnRango(int num, int inicio,int limite_incluido){
+        return (inicio <= num && num >= limite_incluido);
+    }
+
+    public int perdirNumero(String descricion, Scanner scanner){
+        return Integer.parseInt(pedirDato(descricion, scanner));
+    }
+
+    // Metodos Meni
     public void añadirPersonas(Scanner scaner){
         boolean activo = true;
         while (activo){
@@ -149,7 +158,6 @@ public class Proyecto {
 
                     }
 
-
                     // RESPONSABLE DE LA TAREA
                     Persona persona_responsable = new Persona(null,null,null);
                     bucle_activo = true;
@@ -178,8 +186,7 @@ public class Proyecto {
                     }
 
                     // PRIORIDAD
-//                    System.out.println("Nombre: " );
-//                    String nombre = scaner.nextLine();
+
 //
 //                    // FECHA CREACION
 //                    System.out.println("Nombre: " );

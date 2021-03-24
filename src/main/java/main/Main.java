@@ -72,9 +72,6 @@ public class Main {
             }catch (InputMismatchException e){
                 in.nextLine(); // Es necesario porque sino a el programa no le da tiempo a leer es "nextDouble"
                 System.out.println("El numero no es correcto prueba, otra vez por favor:\n");
-            }catch (NoSuchElementException a){
-                System.out.println("Falla la recursividad del menu, todavia no se como solucionarlo");
-                return in.nextInt();
             }
         }
     }
