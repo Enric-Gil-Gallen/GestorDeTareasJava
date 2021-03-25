@@ -1,6 +1,6 @@
 package datos;
 
-public class Resultado {
+public abstract class Resultado {
     int id;
     double horas_totola;
     Enum tipo_Int_Ext;
