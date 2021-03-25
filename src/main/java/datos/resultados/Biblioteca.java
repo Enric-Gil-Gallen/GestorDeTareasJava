@@ -13,4 +13,5 @@ public class Biblioteca extends Resultado {
         this.num_lineas = num_lineas;
         this.num_modulos = num_modulos;
     }
+
 }

@@ -1,10 +1,8 @@
 package main;
 
-import datos.Persona;
-import datos.Proyecto;
-import datos.Tarea;
-import datos.Resultado;
+import datos.*;
 import datos.enums.menu;
+import datos.resultados.Biblioteca;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -23,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scaner = new Scanner(System.in);
-        int opcion;
+        int opcion, opcino_prioridad;
         boolean activo = true;
         System.out.println("Bienvedo al gestor que tareas");
         System.out.println("Eliga una opción introduciendo el numero \n");
@@ -31,7 +29,7 @@ public class Main {
         //Menu infinito hasta que se pulse la tecla 7
         boolean salir = true;
         while (salir) {
-            opcion = numero_correcto(scaner);
+            opcion = numero_correcto(scaner, menu.getMenu());
             switch (opcion) {
                 case 1:
                     System.out.println("¿ Cual va a ser el nombre del proyecto ?");
@@ -91,6 +89,7 @@ public class Main {
 
                 case 3:
                     activo = true;
+                    boolean hayPersonas = false;
                     while (activo){
                         String num = pedirDato(" ¿Que quieres hacer ?\n" +
                                 "\t1 - Introducir tarea \n" +
@@ -136,13 +135,14 @@ public class Main {
                                                 if (nombre.equals(proyecto.getPersonas().get(i).getNombre())){
                                                     System.out.println("El usuario es valido");
                                                     bucle_activo = false;
+                                                    hayPersonas = true;
                                                     personas_tarea.add(proyecto.getPersonas().get(i));
                                                     break;
                                                 }
                                             }
-
+                                            bucle_activo = false;
                                             System.out.println("Esa persona no esta registrada \n" +
-                                                    "Pruebe otra vez");
+                                                    "Pruebe otra vez\n");
                                         }
                                         else {
                                             System.out.println("No hay ninguna persona registrada en el Proyecto");
@@ -155,56 +155,94 @@ public class Main {
 
                                 }
 
+                                // DESCRIPCION
+                                String descripcion = pedirDato("Descricion",scaner);
+
                                 // RESPONSABLE DE LA TAREA
-                                Persona persona_responsable = new Persona(null,null,null);
-                                bucle_activo = true;
-                                while (bucle_activo){
-                                    System.out.println("Dime el nombre de la persona responsable: " );
-                                    String nombre = scaner.nextLine();
+                                Persona persona_responsable = null;
+                                if (hayPersonas) {
+                                    persona_responsable = new Persona(null, null, null);
+                                    bucle_activo = true;
+                                    while (bucle_activo) {
+                                        System.out.println("Dime el nombre de la persona responsable: ");
+                                        String nombre = scaner.nextLine();
 
-                                    if (personas_tarea.size() != 0){
-                                        for (int i = 0; i < personas_tarea.size(); i++){
-                                            if (nombre.equals(personas_tarea.get(i).getNombre())){
-                                                System.out.println("El usuario es valido");
-                                                bucle_activo = false;
-                                                persona_responsable = personas_tarea.get(i);
-                                                break;
+                                        if (personas_tarea.size() != 0) {
+                                            for (int i = 0; i < personas_tarea.size(); i++) {
+                                                if (nombre.equals(personas_tarea.get(i).getNombre())) {
+                                                    System.out.println("El usuario es valido");
+                                                    bucle_activo = false;
+                                                    persona_responsable = personas_tarea.get(i);
+                                                    break;
+                                                }
                                             }
+
+                                            System.out.println("Esa persona no esta registrada en las persona incritas en la tarea \n" +
+                                                    "Pruebe otra vez");
+                                        } else {
+                                            System.out.println("No hay ninguna persona registrada en el Proyecto");
+                                            bucle_activo = false;
                                         }
-
-                                        System.out.println("Esa persona no esta registrada en las persona incritas en la tarea \n" +
-                                                "Pruebe otra vez");
                                     }
-                                    else {
-                                        System.out.println("No hay ninguna persona registrada en el Proyecto");
-                                        bucle_activo = false;
-                                    }
-
+                                }
+                                else {
+                                    System.out.println("Si la tarea no tiene gente asignada no puede tener ningun responsable ");
                                 }
 
                                 // PRIORIDAD
+                                int prioridad = pedirNumero(1,5,scaner,"Indica la prioridad del 1 al 5, siendo 5 la mas alta\nPrioridad:\n");
 
-//
-//                    // FECHA CREACION
-//                    System.out.println("Nombre: " );
-//                    String nombre = scaner.nextLine();
-//
-//                    // FECHA FINALIZACION
-//                    System.out.println("Nombre: " );
-//                    String nombre = scaner.nextLine();
-//
-//                    // TAREA FINALIZADA
-//                    System.out.println("Nombre: " );
-//                    String nombre = scaner.nextLine();
-//
-//                    // RESULTADO ESPERADO
-//                    System.out.println("Nombre: " );
-//                    String nombre = scaner.nextLine();
+                                // FECHA CREACION
+                                System.out.println("Introducir la fecha de creacion: " );
+                                Fecha fechaCreacion = pedirFecha(scaner);
+
+                                // FECHA FINALIZACION
+                                Fecha fechaFinalizacion = null;
+                                if (pedirNumero(1,2,scaner, "¿ Quires añadir fecha de finlización ?\n\t1 - Si\n\t2 - No") == 1){
+                                    bucle_activo = true;
+                                    while (bucle_activo){
+                                        fechaFinalizacion = pedirFecha(scaner);
+                                        if (fechaCreacion.comparadorFechas(fechaCreacion, fechaFinalizacion)){
+                                            bucle_activo = false;
+                                        }
+                                        else {
+                                            System.out.println("La fecha de finalizacion no puede ser mas antigua que la fecha de antigua");
+                                        }
+                                    }
+                                }
+
+                                // TAREA FINALIZADA
+                                boolean tareaFinalizada = true;
+                                int tareaFin = pedirNumero(1,2,scaner,"Indica si la tarea esta finalizada \n\t1 - Si\n\t2 - No");
+                                if (tareaFin == 2){
+                                    tareaFinalizada = false;
+                                }
+
+                                // RESULTADO ESPERADO
+                                Resultado resultado;
+                                switch (pedirNumero(1,4,scaner,"¿ Que tipo de resultado se espera ? \n\t1 - Biblioteca\n\t2 - Documento\n\t3 - Paguina Web\n\t4 - Programa")){
+                                    case (1):
+
+//                                        resultado = new Biblioteca()
+                                        break;
+                                    case (2):
+
+                                        break;
+                                    case (3):
+
+                                        break;
+                                    case (4):
+
+                                        break;
+                                    default:
+
+                                        break;
+                                }
 
                                 // ETIQUETAS
 
                                 // AÑADIR LAS TAREAS
-//                    Tarea tarea = new Tarea(titulo,pedirDato("Descricion",scaner),personas_tarea,persona_responsable, null, null, null);
+//                    Tarea tarea = new Tarea(titulo, descripcion,personas_tarea,persona_responsable, prioridad, fechaCreacion, fechaFinalizacion, tareaFinalizada, );
 //                    proyecto.añadirTarea(tarea);
                             }
                             else {
@@ -257,9 +295,9 @@ public class Main {
         }
     }
 
-    public static int numero_correcto(Scanner scaner) {
+    public static int numero_correcto(Scanner scaner, String palabra) {
         // Llamadas en Enum --> menu
-        System.out.println(menu.getMenu());
+        System.out.println(palabra);
         scaner = new Scanner(System.in);
         int opcion = 0;
 
@@ -274,6 +312,29 @@ public class Main {
         System.out.println(nombreDato + ": ");
         String resul = scaner.nextLine();
         return resul;
+    }
+
+    public static boolean rangoCorrecto(int minimo, int maximo, int num){
+        return minimo <= num && maximo >= num;
+    }
+
+    public static int pedirNumero(int minimo, int maximo, Scanner scaner, String mensaje){
+        boolean bucle_activo = true;
+        while (bucle_activo){
+            int opcino_prioridad = numero_correcto(scaner, mensaje);
+            if (rangoCorrecto(minimo, maximo, opcino_prioridad)){
+                bucle_activo = false;
+                return opcino_prioridad;
+            }
+        }
+        return 0;
+    }
+
+    public static Fecha pedirFecha(Scanner scaner){
+        int dia = pedirNumero(1,30, scaner, "Dia: (Del 1 al 30)");
+        int mes = pedirNumero(1,12, scaner, "Dia: (Del 1 al 12)");
+        int año = pedirNumero(2021,2100, scaner, "Dia: (Del 2021 al 2100)");
+        return  new Fecha(dia,mes,año);
     }
 }
 

@@ -12,4 +12,5 @@ public abstract class Resultado {
         this.tipo_Int_Ext = tipo_Int_Ext;
         this.lenguaje = lenguaje;
     }
+
 }
