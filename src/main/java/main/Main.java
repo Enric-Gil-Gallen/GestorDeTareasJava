@@ -333,7 +333,7 @@ public class Main {
                         proyecto.buscarTareaPorTitulo(pedirDato("Nombre de la tarea: ", scaner)).marcarTareaFinalizada();
                     }
                     catch (NullPointerException e){
-                        System.out.println("No se pueden introducir nombre que no existen");
+                        System.out.println("No se pueden introducir titulo erronio");
                     }
                     break;
 
