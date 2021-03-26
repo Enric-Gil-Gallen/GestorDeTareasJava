@@ -38,14 +38,6 @@ public String pedirDato(String nombreDato, Scanner scaner){
     return resul;
 }
 
-    public boolean numeroEnRango(int num, int inicio,int limite_incluido){
-        return (inicio <= num && num >= limite_incluido);
-    }
-
-    public int perdirNumero(String descricion, Scanner scanner){
-        return Integer.parseInt(pedirDato(descricion, scanner));
-    }
-
     // Metodos usados por el menu "principalmente"
     public void añadirPersonas(Persona persona){
             personas.add(persona);
