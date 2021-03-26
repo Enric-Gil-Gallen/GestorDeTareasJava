@@ -32,40 +32,18 @@ public class Tarea {
         return titulo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public LinkedList<Persona> getPersonas() {
-        return Personas;
-    }
-
-    public Persona getResponsable_Tarea() {
-        return responsable_Tarea;
-    }
-
-    public int getPrioridad() {
-        return prioridad;
-    }
-
-    public Fecha getFecha_Creacion() {
-        return fecha_Creacion;
-    }
-
-    public Fecha getFecha_Finalizacion() {
-        return fecha_Finalizacion;
-    }
-
     public Boolean getTarea_Finalizada() {
         return tarea_Finalizada;
     }
 
-    public Resultado getResultado_Esperado() {
-        return resultado_Esperado;
+    public void setTarea_Finalizada(Boolean tarea_Finalizada) {
+        this.tarea_Finalizada = tarea_Finalizada;
     }
 
-    public LinkedList getEtiquetas() {
-        return etiquetas;
+    public void marcarTareaFinalizada(){
+        if (!getTarea_Finalizada()){
+            setTarea_Finalizada(true);
+        }
     }
 }
 

@@ -1,12 +1,13 @@
 package datos.enums;
 
-public enum tipo_Int_Ext {
+public enum Interno_Externo {
     INTERNO("Interno"),
     EXTERNO("Externo");
 
     String tipo;
 
-    tipo_Int_Ext(String tipo) {
+    Interno_Externo(String tipo) {
         this.tipo = tipo;
     }
+
 }

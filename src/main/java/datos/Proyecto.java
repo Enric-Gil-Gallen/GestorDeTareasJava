@@ -46,12 +46,22 @@ public String pedirDato(String nombreDato, Scanner scaner){
         return Integer.parseInt(pedirDato(descricion, scanner));
     }
 
-    // Metodos Meni
+    // Metodos usados por el menu "principalmente"
     public void añadirPersonas(Persona persona){
             personas.add(persona);
     }
 
-    public void añadirTareas(Tarea tarea){
+    public void añadirTarea(Tarea tarea){
         tareas.add(tarea);
+    }
+
+    public Tarea buscarTareaPorTitulo(String titulo){
+        for (int i = 0; i < tareas.size(); i++){
+            if (tareas.get(i).getTitulo().equals(titulo)){
+                return tareas.get(i);
+            }
+        }
+        System.out.println("La tarea no se encuentra disponible");
+        return null;
     }
 }
