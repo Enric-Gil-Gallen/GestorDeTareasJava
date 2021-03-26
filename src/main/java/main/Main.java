@@ -16,7 +16,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    static Proyecto proyecto = new Proyecto("ejem");
 
     // Patrón para validar el email
     static Pattern pattern = Pattern
@@ -28,7 +27,8 @@ public class Main {
         int opcion, opcino_prioridad;
         boolean activo = true;
         System.out.println("Bienvedo al gestor que tareas");
-        System.out.println("Eliga una opción introduciendo el numero \n");
+        System.out.println("¿ Cual va a ser el nombre del proyecto ?");
+        Proyecto proyecto = new Proyecto(pedirDato("Nombre del proyecto", scaner));
 
         //Menu infinito hasta que se pulse la tecla 7
         boolean salir = true;
@@ -36,10 +36,8 @@ public class Main {
             opcion = pedirNumero(scaner, Menu.getMenu());
             switch (opcion) {
                 case 1:
-                    System.out.println("¿ Cual va a ser el nombre del proyecto ?");
-                    scaner = new Scanner(System.in);
-                    String nombre_proyecto = scaner.nextLine();
-                    proyecto = new Proyecto(nombre_proyecto);
+                    System.out.println("¿ Cual va a ser el nombre del nuevo proyecto ?");
+                    proyecto = new Proyecto(pedirDato("Nombre del proyecto: ", scaner));
                     break;
 
                 case 2:
