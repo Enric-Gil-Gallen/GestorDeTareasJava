@@ -21,4 +21,6 @@ public class ProyectoTest extends TestCase {
         assertTrue(proyecto.getTareas().get(0).getTarea_Finalizada());
     }
 
+
+
 }

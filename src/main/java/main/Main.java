@@ -26,7 +26,7 @@ public class Main {
         Scanner scaner = new Scanner(System.in);
         int opcion, opcino_prioridad;
         boolean activo = true;
-        System.out.println("Bienvedo al gestor que tareas");
+        System.out.println("Bienvenido al gestor que tareas");
         System.out.println("¿ Cual va a ser el nombre del proyecto ?");
         Proyecto proyecto = new Proyecto(pedirDato("Nombre del proyecto", scaner));
 
@@ -333,20 +333,41 @@ public class Main {
                         proyecto.buscarTareaPorTitulo(pedirDato("Nombre de la tarea: ", scaner)).marcarTareaFinalizada();
                     }
                     catch (NullPointerException e){
-                        System.out.println("No se pueden introducir titulo erronio");
+                        System.out.println("No se pueden introducir: titulo erróneo");
                     }
                     break;
 
                 case 5:
-                    // Declaraciones
+                    Scanner sc = new Scanner(System.in);
+                    System.out.print("Introduce una tarea: ");
+                    String tarea = sc.nextLine();
+                    System.out.print("¿ Desea Añadir o Borrar a una persona ? [A/B] ");
+                    String anyadirBorrar = sc.nextLine();
+                    System.out.print("Sobre qué persona desea ejecutar la operación: ");
+                    String personaElegida = sc.nextLine();
+                    Persona pers = new Persona(personaElegida, "", new LinkedList<String>());
+                    if (anyadirBorrar == "A"){
+                        if (proyecto.buscarTareaPorTitulo(tarea).introducirPersona(pers) == true){
+                            System.out.println("Se ha añadido a la persona con éxito.");
+                        } else {
+                            System.out.println("No se ha podido añadir a la persona.");
+                        }
+                    } else if (anyadirBorrar == "B"){
+                        if (proyecto.buscarTareaPorTitulo(tarea).borrarPersona(pers) == true){
+                            System.out.println("Se ha eliminado a la persona con éxito.");
+                        } else {
+                            System.out.println("No se ha podido eliminar a la persona.");
+                        }
+                    }
+
                     break;
 
                 case 6:
-                    // Declaraciones
+                    System.out.println(proyecto.personasDelProyecto(proyecto));
                     break;
 
                 case 7:
-                    // Declaraciones
+                    System.out.println(proyecto.tareasDelProyecto(proyecto));
                     break;
 
                 case 8:
