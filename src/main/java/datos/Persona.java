@@ -2,15 +2,35 @@ package datos;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Persona {
     String nombre;
     String email;
-    LinkedList lista;
+    LinkedList<String> tareas_lista;
 
-    public Persona(String nombre, String email, LinkedList lista) {
+    public Persona(String nombre, String email, LinkedList<String> tareas_lista) {
+        this.nombre = nombre;
+        this.email = email; // No puede estar repetido, es el ID
+        this.tareas_lista = tareas_lista;
+    }
+
+    public Persona(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
-        this.lista = lista;
+        this.tareas_lista = new LinkedList<>();
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public LinkedList<String> getTareas_lista() {
+        return tareas_lista;
+    }
+
 }

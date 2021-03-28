@@ -1,12 +1,12 @@
-package datos.resultados.enums;
+package datos.enums;
 
-public enum estado {
+public enum Estado {
     ESTATICA("Estatica"),
     DINAMICA("Dinamica");
 
     String tipo;
 
-    estado(String tipo) {
+    Estado(String tipo) {
         this.tipo = tipo;
     }
 }

@@ -9,8 +9,5 @@
         <module name="GestorDeTareas" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="GestorDeTareas" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
