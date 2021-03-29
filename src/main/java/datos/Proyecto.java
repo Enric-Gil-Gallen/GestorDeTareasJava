@@ -89,6 +89,16 @@ public class Proyecto {
     public void eliminarPersona(Persona persona){
         personas.remove(persona);
     }
+
+    public Persona buscarPersonaEmail(String email){
+        Persona resul = null;
+        for (Persona persona : personas){
+            if (persona.getEmail().equals(email)){
+                return persona;
+            }
+        }
+        return resul;
+    }
 }
 
 

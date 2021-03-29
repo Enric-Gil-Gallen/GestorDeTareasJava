@@ -61,7 +61,9 @@ public class Main {
                 case 3:
                     activo = true;
                     boolean hayPersonas = false;
-                    boolean hayPersonas2 = false;
+                    LinkedList<Persona> personas_tarea = new LinkedList<>();
+
+
                     while (activo) {
                         String num = pedirDato(" ¿Que quieres hacer ?\n" +
                                 "\t1 - Introducir tarea \n" +
@@ -94,45 +96,46 @@ public class Main {
                                 }
 
                                 // PERSONAS
-                                LinkedList<Persona> personas_tarea = new LinkedList<>();
-                                bucle_activo = true;
-                                while (bucle_activo) {
-                                    String nombre = pedirDato("Dime el nombre de algun integrante\n" +
-                                            "\t Escriba 1 para salir: ", scaner);
+                                if (proyecto.getPersonas().isEmpty()){
+                                    System.out.println("Si no hay personas en el proyecto no puedes asignar personas en una tarea");
+                                }
+                                else {
+                                    bucle_activo = true;
+                                    while (bucle_activo) {
+                                        String nombre = pedirDato("Dime el nombre de algun integrante\n" +
+                                                "\t Escriba 1 para salir: ", scaner);
 
-                                    if (!nombre.equals("1")) {
-                                        if (proyecto.getPersonas().size() != 0) {
-                                            for (int i = 0; i < proyecto.getPersonas().size(); i++) {
-                                                if (nombre.equals(proyecto.getPersonas().get(i).getNombre())) {
-                                                    System.out.println("El usuario es valido\n");
-                                                    hayPersonas = true;
-                                                    hayPersonas2 = true;
-                                                    personas_tarea.add(proyecto.getPersonas().get(i));
-                                                    break;
+                                        if (!nombre.equals("1")) {
+                                            if (proyecto.getPersonas().size() != 0) {
+                                                for (int i = 0; i < proyecto.getPersonas().size(); i++) {
+                                                    if (nombre.equals(proyecto.getPersonas().get(i).getNombre())) {
+                                                        System.out.println("El usuario es valido\n");
+                                                        hayPersonas = true;
+                                                        personas_tarea.add(proyecto.getPersonas().get(i));
+                                                        break;
+                                                    }
                                                 }
+                                                if (!hayPersonas) {
+                                                    System.out.println("Esa persona no esta registrada \n" +
+                                                            "Pruebe otra vez\n");
+                                                }
+                                                hayPersonas = false;
+                                            } else {
+                                                System.out.println("No hay ninguna persona registrada en el Proyecto");
+                                                bucle_activo = false;
                                             }
-                                            if (!hayPersonas2) {
-                                                System.out.println("Esa persona no esta registrada \n" +
-                                                        "Pruebe otra vez\n");
-                                            }
-                                            hayPersonas2 = false;
                                         } else {
-                                            System.out.println("No hay ninguna persona registrada en el Proyecto");
                                             bucle_activo = false;
                                         }
-                                    } else {
-                                        bucle_activo = false;
-                                    }
 
+                                    }
                                 }
 
-                                // DESCRIPCION
-                                String descripcion = pedirDato("Descricion", scaner);
+
 
                                 // RESPONSABLE DE LA TAREA
                                 Persona persona_responsable = null;
-                                if (hayPersonas) {
-                                    persona_responsable = new Persona("", null, null);
+                                if (!personas_tarea.isEmpty()){
                                     bucle_activo = true;
                                     while (bucle_activo) {
                                         System.out.println("Dime el nombre de la persona responsable: ");
@@ -144,23 +147,27 @@ public class Main {
                                                     System.out.println("El usuario es valido\n");
                                                     bucle_activo = false;
                                                     persona_responsable = personas_tarea.get(i);
-                                                    hayPersonas2 = true;
+                                                    hayPersonas = true;
                                                     break;
                                                 }
                                             }
-                                            if (!hayPersonas2) {
+                                            if (!hayPersonas) {
                                                 System.out.println("Esa persona no esta registrada en las persona incritas en la tarea \n" +
                                                         "Pruebe otra vez\n");
                                             }
-                                            hayPersonas2 = false;
+                                            hayPersonas = false;
                                         } else {
                                             System.out.println("No hay ninguna persona registrada en el Proyecto");
                                             bucle_activo = false;
                                         }
                                     }
-                                } else {
+                                }
+                                 else {
                                     System.out.println("Si la tarea no tiene gente asignada no puede tener ningun responsable ");
                                 }
+
+                                // DESCRIPCION
+                                String descripcion = pedirDato("Descricion", scaner);
 
                                 // PRIORIDAD
                                 int prioridad = pedirNumeroEnRango(1, 5, scaner, "Indica la prioridad del 1 al 5, siendo 5 la mas alta\nPrioridad:");
@@ -318,15 +325,28 @@ public class Main {
                         int opcionEstado = pedirNumeroEnRango(1, 2, scaner, "¿ Que quieres hacer ? \n\t1 - Introducir persona\n\t2 - Eliminar persona\n\t");
                         switch (opcionEstado) {
                             case (1):
-                                Persona persona = añadirPersona(scaner, proyecto);
-                                tarea.añadirPersona(persona);
+                                if (!proyecto.getPersonas().isEmpty()){
+                                    Persona persona = proyecto.buscarPersonaEmail(pedirDato("Email", scaner));
+                                    persona.cargarTarea(tarea);
+                                    tarea.añadirPersona(persona);
+                                }
+                                else {
+                                    System.out.println("No se puede añadir la persona");
+                                    System.out.println("Primero tiene que declarar la persona en el proyecto");
+                                }
                                 break;
                             case (2):
-                                System.out.println("Dime el email de la persona que desea eliminar: ");
-                                String email = pedirDato("\tEmail", scaner);
-                                if (tarea.personaExistePorEmail(email)) {
-                                    tarea.eliminarPersona(email);
+                                if(!tarea.getPersonas().isEmpty()){
+                                    System.out.println("Dime el email de la persona que desea eliminar: ");
+                                    String email = pedirDato("\tEmail", scaner);
+                                    if (tarea.personaExistePorEmail(email)) {
+                                        tarea.eliminarPersona(email);
+                                    }
                                 }
+                                else {
+                                    System.out.println("No hay ningua persona asirganada a esta tarea");
+                                }
+
                                 break;
                         }
 
