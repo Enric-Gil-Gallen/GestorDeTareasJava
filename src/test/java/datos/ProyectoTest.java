@@ -21,6 +21,17 @@ public class ProyectoTest extends TestCase {
         assertTrue(proyecto.getTareas().get(0).getTarea_Finalizada());
     }
 
+    public void testListasDevueltasListasVacias(){
+        Proyecto proyecto = new Proyecto("Ejemplo");
+        Boolean flag = false;
+        if (proyecto.personas.size() == 0 && proyecto.tareas.size() == 0 && proyecto.resultados.size() == 0){
+            flag = true;
+        } else {
+            flag = false;
+        }
+        assertTrue(flag);
+    }
+
 
 
 }

@@ -7,9 +7,9 @@ import java.util.Scanner;
 public class Persona {
     String nombre;
     String email;
-    LinkedList<String> tareas_lista;
+    LinkedList<Tarea> tareas_lista;
 
-    public Persona(String nombre, String email, LinkedList<String> tareas_lista) {
+    public Persona(String nombre, String email, LinkedList<Tarea> tareas_lista) {
         this.nombre = nombre;
         this.email = email; // No puede estar repetido, es el ID
         this.tareas_lista = tareas_lista;
@@ -29,8 +29,14 @@ public class Persona {
         return email;
     }
 
-    public LinkedList<String> getTareas_lista() {
+    public LinkedList<Tarea> getTareas_lista() {
         return tareas_lista;
+    }
+
+    public void cargarTarea(Tarea tarea){
+        if(!tareas_lista.contains(tarea)){
+            tareas_lista.add(tarea);
+        }
     }
 
 }

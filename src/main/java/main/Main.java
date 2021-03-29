@@ -277,6 +277,14 @@ public class Main {
                                 // AÑADIR LAS TAREAS
                                 Tarea tarea = new Tarea(titulo, descripcion, personas_tarea, persona_responsable, prioridad, fechaCreacion, fechaFinalizacion, tareaFinalizada, resultado, etiquetas);
                                 proyecto.añadirTarea(tarea);
+
+                                // AÑADIR LA TAREA A LAS PERSINAS REGISTRADAS
+                                if (!personas_tarea.isEmpty()){
+                                    for (Persona persona : personas_tarea){
+                                        persona.cargarTarea(tarea);
+                                    }
+                                }
+
                             } else {
                                 break;
                             }

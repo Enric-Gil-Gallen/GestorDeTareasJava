@@ -27,17 +27,6 @@ public class Proyecto {
         return tareas;
     }
 
-    public LinkedList<Resultado> getResultados() {
-        return resultados;
-    }
-
-    // Metodo que pide por pantalla
-    public String pedirDato(String nombreDato, Scanner scaner){
-        System.out.println(nombreDato+": " );
-        String resul  = scaner.nextLine();
-        return resul;
-    }
-
     // Metodos usados por el menu "principalmente"
     public void añadirPersonas(Persona persona){
             personas.add(persona);
@@ -95,6 +84,10 @@ public class Proyecto {
             }
             return sb.toString();
         }
+    }
+
+    public void eliminarPersona(Persona persona){
+        personas.remove(persona);
     }
 }
 
