@@ -56,24 +56,6 @@ public class Tarea {
         }
     }
 
-    public Boolean introducirPersona(Persona persona){
-        if (getPersonas().contains(persona)){
-            return false;
-        } else {
-            getPersonas().add(persona);
-            return true;
-        }
-    }
-
-    public Boolean borrarPersona(Persona persona){
-        if(getPersonas().contains(persona)){
-            getPersonas().remove(persona);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public String getPersonasYResponsable(){
         if (personas.isEmpty()){
             return "La tarea no tiene ninguna persona reguistrada";
@@ -99,5 +81,49 @@ public class Tarea {
         }
     }
 
+    public boolean personaExistePorEmail(String email){
+        if (!personas.isEmpty()){
+            for (Persona persona : personas){
+                if (persona.getEmail().equals(email)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void añadirPersona(Persona persona){
+        if (!personas.isEmpty()){
+            if (!personaExistePorEmail(persona.getEmail())){
+                personas.add(persona);
+            }
+            else {
+                System.out.println("La persona ya esta el la tarea");
+            }
+        }
+    }
+
+    public Persona cojerPersonaPorEmail(String email){
+        for (Persona persona : personas){
+            if (persona.getEmail().equals(email)){
+                return persona;
+            }
+        }
+        return null;
+    }
+
+    public boolean esLaPersonaResponsableEmail(String email){
+        if (responsable_Tarea != null && cojerPersonaPorEmail(email).getEmail().equals(responsable_Tarea.getEmail())){
+            return true;
+        }
+        return false;
+    }
+    public void eliminarPersona(String email){
+        if (esLaPersonaResponsableEmail(email)){
+            responsable_Tarea = null;
+            System.out.println("La persona responsable tambien a sido eliminada");
+        }
+        personas.remove(cojerPersonaPorEmail(email));
+    }
 }
 

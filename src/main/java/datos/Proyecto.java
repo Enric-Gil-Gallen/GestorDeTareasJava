@@ -53,7 +53,7 @@ public class Proyecto {
                 return tareas.get(i);
             }
         }
-        System.out.println("La tarea no se encuentra disponible");
+        System.out.println("El titulo no pertenece a ninguna tarea");
         return null;
     }
 
