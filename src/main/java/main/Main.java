@@ -37,7 +37,7 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("¿ Cual va a ser el nombre del nuevo proyecto ?");
-                    proyecto = new Proyecto(pedirDato("Nombre del proyecto: ", scaner));
+                    proyecto = new Proyecto(pedirDato("Nombre del proyecto", scaner));
                     break;
 
                 case 2:
@@ -129,7 +129,7 @@ public class Main {
                                 LinkedList<Persona> personas_tarea = new LinkedList<>();
                                 bucle_activo = true;
                                 while (bucle_activo){
-                                    String nombre = pedirDato("Dime el nombre de algun integrante: \n" +
+                                    String nombre = pedirDato("Dime el nombre de algun integrante\n" +
                                             "\t Escriba 1 para salir: ", scaner);
 
                                     if (!nombre.equals("1")){
@@ -166,7 +166,7 @@ public class Main {
                                 // RESPONSABLE DE LA TAREA
                                 Persona persona_responsable = null;
                                 if (hayPersonas) {
-                                    persona_responsable = new Persona(null, null, null);
+                                    persona_responsable = new Persona("", null, null);
                                     bucle_activo = true;
                                     while (bucle_activo) {
                                         System.out.println("Dime el nombre de la persona responsable: ");
@@ -253,20 +253,20 @@ public class Main {
                                     case (4):
 
                                         numModulos = pedirNumero(scaner, "Numero de modulos: ");
-                                        lenguaje = pedirDato("Idioma: ", scaner);
+                                        lenguaje = pedirDato("Idioma", scaner);
 
                                         if (opcion== 1) {
                                             numLineas = pedirNumero(scaner, "Numero de lineas: ");
-                                            resultado = new Documento(id, horasTotal, d, lenguaje, numLineas, numModulos);
+                                            resultado = new Documento(id, horasTotal, d, lenguaje,"", numLineas, numModulos);
 
                                         }
                                         else {
                                             numLineas = pedirNumero(scaner, "Numero de paginas: ");
                                             if (opcion == 2){
-                                                resultado = new Biblioteca(id, horasTotal,d, lenguaje, numLineas,numModulos);
+                                                resultado = new Biblioteca(id, horasTotal,d, lenguaje,"", numLineas,numModulos);
                                             }
                                             else {
-                                                resultado = new Programa(id, horasTotal,d, lenguaje, numLineas,numModulos);
+                                                resultado = new Programa(id, horasTotal,d, lenguaje,"", numLineas,numModulos);
                                             }
                                         }
 
@@ -274,8 +274,8 @@ public class Main {
 
                                     // Paguna Web
                                     case (3):
-                                        lenguaje = pedirDato("Lenguage de progamacion: ", scaner);
-                                        String tipoBack = pedirDato("Tipo de Back utilizado: ", scaner);
+                                        lenguaje = pedirDato("Lenguage de progamacion", scaner);
+                                        String tipoBack = pedirDato("Tipo de Back utilizado", scaner);
                                         int opcionEstado = pedirNumeroEnRango(1,2,scaner,"¿ Como es el resultado ? \n\t1 - Estatica\n\t2 - Dinamica\n\t");
                                         Estado t = null;
                                         switch (opcionResultado){
@@ -287,7 +287,7 @@ public class Main {
                                                 t = Estado.DINAMICA;
                                                 break;
                                         }
-                                        resultado = new Pagina_web(id, horasTotal,d,lenguaje,t,tipoBack);
+                                        resultado = new Pagina_web(id, horasTotal,d,lenguaje,"",t,tipoBack);
                                         break;
                                 }
 
@@ -298,7 +298,7 @@ public class Main {
                                 while (bucle_activo){
                                     if (pedirNumeroEnRango(1,2,scaner, "¿ Quires añadir una etiqueta ?\n\t1 - Si\n\t2 - No")== 1){
                                         if (etiquetas.isEmpty()){
-                                            etiqueta = pedirDato("Nombre de la Etiqueta: ", scaner);
+                                            etiqueta = pedirDato("Nombre de la Etiqueta", scaner);
                                             for (int i = 0; i < etiquetas.size(); i++){
                                                 if (etiquetas.get(i).equals(etiqueta)){
                                                     System.out.println("Las etiquetas no pueden estar repetidas \n");
@@ -306,7 +306,7 @@ public class Main {
                                             }
                                         }
                                         else {
-                                            pedirDato("Nombre de la Etiqueta: ", scaner);
+                                            pedirDato("Nombre de la Etiqueta", scaner);
                                         }
                                     }
                                     else {
@@ -330,7 +330,7 @@ public class Main {
 
                 case 4:
                     try {
-                        proyecto.buscarTareaPorTitulo(pedirDato("Nombre de la tarea: ", scaner)).marcarTareaFinalizada();
+                        proyecto.buscarTareaPorTitulo(pedirDato("Nombre de la tarea", scaner)).marcarTareaFinalizada();
                     }
                     catch (NullPointerException e){
                         System.out.println("No se pueden introducir: titulo erróneo");
@@ -338,13 +338,12 @@ public class Main {
                     break;
 
                 case 5:
-                    Scanner sc = new Scanner(System.in);
                     System.out.print("Introduce una tarea: ");
-                    String tarea = sc.nextLine();
+                    String tarea = scaner.nextLine();
                     System.out.print("¿ Desea Añadir o Borrar a una persona ? [A/B] ");
-                    String anyadirBorrar = sc.nextLine();
+                    String anyadirBorrar = scaner.nextLine();
                     System.out.print("Sobre qué persona desea ejecutar la operación: ");
-                    String personaElegida = sc.nextLine();
+                    String personaElegida = scaner.nextLine();
                     Persona pers = new Persona(personaElegida, "", new LinkedList<String>());
                     if (anyadirBorrar == "A"){
                         if (proyecto.buscarTareaPorTitulo(tarea).introducirPersona(pers) == true){
@@ -363,11 +362,11 @@ public class Main {
                     break;
 
                 case 6:
-                    System.out.println(proyecto.personasDelProyecto(proyecto));
+                    proyecto.personasDelProyecto();
                     break;
 
                 case 7:
-                    System.out.println(proyecto.tareasDelProyecto(proyecto));
+                    System.out.println(proyecto.tareasDelProyecto());
                     break;
 
                 case 8:

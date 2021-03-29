@@ -1,12 +1,11 @@
 package datos;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class Tarea {
     String titulo; // Tiene que ser unico, es el ID
     String descripcion;
-    LinkedList<Persona> Personas;
+    LinkedList<Persona> personas;
     Persona responsable_Tarea;
     int prioridad; // Entre 1: muy baja, y 5: muy alta
     Fecha fecha_Creacion;
@@ -18,7 +17,7 @@ public class Tarea {
     public Tarea(String titulo, String descripcion, LinkedList<Persona> personas, Persona responsable_Tarea, int prioridad, Fecha fecha_Creacion, Fecha fecha_Finalizacion, Boolean tarea_Finalizada, Resultado resultado_Esperado, LinkedList etiquetas) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        Personas = personas;
+        this.personas = personas;
         this.responsable_Tarea = responsable_Tarea;
         this.prioridad = prioridad;
         this.fecha_Creacion = fecha_Creacion;
@@ -28,6 +27,7 @@ public class Tarea {
         this.etiquetas = etiquetas;
     }
 
+    // Geters
     public String getTitulo() {
         return titulo;
     }
@@ -36,10 +36,20 @@ public class Tarea {
         return tarea_Finalizada;
     }
 
+    public LinkedList<Persona> getPersonas() {
+        return personas;
+    }
+
+    public Resultado getResultado_Esperado() {
+        return resultado_Esperado;
+    }
+
+    // Seters
     public void setTarea_Finalizada(Boolean tarea_Finalizada) {
         this.tarea_Finalizada = tarea_Finalizada;
     }
 
+    // Otros metodos
     public void marcarTareaFinalizada(){
         if (!getTarea_Finalizada()){
             setTarea_Finalizada(true);
@@ -64,72 +74,30 @@ public class Tarea {
         }
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public String getPersonasYResponsable(){
+        if (personas.isEmpty()){
+            return "La tarea no tiene ninguna persona reguistrada";
+        }
+        else {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Personas en el proyecto:");
+            if (responsable_Tarea.getNombre().equals("")){
+                System.out.println("\t - No exite persona responsable");
+            }
+            sb.append("\n");
+            for (Persona persona : personas){
+                if (responsable_Tarea.getNombre().equals(persona.getNombre())){
+                    sb.append("\t - Persona Responsable: ");
+                    sb.append(persona.getNombre());
+                    sb.append("\n");
+                }
+                sb.append("\t - ");
+                sb.append(persona.getNombre());
+                sb.append("\n");
+            }
+            return sb.toString();
+        }
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public LinkedList<Persona> getPersonas() {
-        return Personas;
-    }
-
-    public void setPersonas(LinkedList<Persona> personas) {
-        Personas = personas;
-    }
-
-    public Persona getResponsable_Tarea() {
-        return responsable_Tarea;
-    }
-
-    public void setResponsable_Tarea(Persona responsable_Tarea) {
-        this.responsable_Tarea = responsable_Tarea;
-    }
-
-    public int getPrioridad() {
-        return prioridad;
-    }
-
-    public void setPrioridad(int prioridad) {
-        this.prioridad = prioridad;
-    }
-
-    public Fecha getFecha_Creacion() {
-        return fecha_Creacion;
-    }
-
-    public void setFecha_Creacion(Fecha fecha_Creacion) {
-        this.fecha_Creacion = fecha_Creacion;
-    }
-
-    public Fecha getFecha_Finalizacion() {
-        return fecha_Finalizacion;
-    }
-
-    public void setFecha_Finalizacion(Fecha fecha_Finalizacion) {
-        this.fecha_Finalizacion = fecha_Finalizacion;
-    }
-
-    public Resultado getResultado_Esperado() {
-        return resultado_Esperado;
-    }
-
-    public void setResultado_Esperado(Resultado resultado_Esperado) {
-        this.resultado_Esperado = resultado_Esperado;
-    }
-
-    public LinkedList getEtiquetas() {
-        return etiquetas;
-    }
-
-    public void setEtiquetas(LinkedList etiquetas) {
-        this.etiquetas = etiquetas;
-    }
 }
 

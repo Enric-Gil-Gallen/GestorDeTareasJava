@@ -58,50 +58,43 @@ public class Proyecto {
     }
 
     //Método que devuelve las personas implicadas en el proyecto
-    public String personasDelProyecto(Proyecto proyecto){
-        LinkedList<Persona> personasLista = proyecto.getPersonas();
-        String personas = "";
-        int size = personasLista.size();
-
-        for (int i = 0; i < size; i++){
-            if (i < (size-1)){
-                personas += personasLista.get(i) + ", ";
-            } else if (i ==(size-1)) {
-                personas += personasLista.get(i);
+    public void personasDelProyecto(){
+        if (personas.isEmpty()){
+            System.out.println("No hay ninguna persona registrada el en proyecto");
+        }
+        else {
+            System.out.println("Los integrantes del proyecto son:");
+            for (int i = 0; i < personas.size(); i++){
+                System.out.println("\t - "+personas.get(i).getNombre());
+                System.out.println("\t \t - "+personas.get(i).getEmail());
             }
         }
-        return personas;
     }
 
     //Método para listar las tareas de un proyecto dado
-    public String tareasDelProyecto (Proyecto proyecto){
-        String tareasDelProyecto = "";
-        int cantidadTareas = proyecto.getTareas().size();
-
-        for (int i = 0; i < cantidadTareas; i++){
-            String tituloTarea = proyecto.getTareas().get(i).getTitulo();
-            String personasAsignadas = "";
-            int personasCantidad = proyecto.getTareas().get(i).getPersonas().size();
-            for (int j = 0; j < personasCantidad; j++){
-                if (i < (personasCantidad-1)){
-                    personasAsignadas += proyecto.getTareas().get(i).getPersonas().get(j) + ", ";
-                } else if (i ==(personasCantidad-1)) {
-                    personasAsignadas += proyecto.getTareas().get(i).getPersonas().get(j);
-                }
-            }
-            String finalizada = "";
-            String resultadoTarea = "";
-            if(getTareas().get(i).getTarea_Finalizada() == true){
-                finalizada = "Tarea finalizada";
-                resultadoTarea += getTareas().get(i).getResultado_Esperado().toString();
-            } else {
-                finalizada = "Tarea no finalizada";
-                resultadoTarea = "No hay resultado disponible: Tarea no finalizada";
-            }
-            tareasDelProyecto += String.format("Tarea %d: %s, personas: %s, estado: %s, resultado: %s\n",
-                    tituloTarea, personasAsignadas, finalizada, resultadoTarea);
+    public String tareasDelProyecto (){
+        if (tareas.isEmpty()){
+            return  "No hay ninguna tarea registrada el en proyecto";
         }
-        return tareasDelProyecto;
+        else {
+            StringBuilder sb = new StringBuilder();
+            sb.append("\n");
+            for (int i = 0; i < tareas.size(); i++){
+                sb.append("Titulo: " +tareas.get(i).getTitulo());
+                sb.append("\n");
+                sb.append(tareas.get(i).getPersonasYResponsable());
+                sb.append("\n");
+                if (tareas.get(i).getTarea_Finalizada()){
+                    sb.append("La tarea esta finalizada \n");
+                }
+                else {
+                    sb.append("La tarea no esta finalizada \n");
+                }
+                sb.append(tareas.get(i).getResultado_Esperado().getResultadoyInformacion());
+                sb.append("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
+            }
+            return sb.toString();
+        }
     }
 }
 
