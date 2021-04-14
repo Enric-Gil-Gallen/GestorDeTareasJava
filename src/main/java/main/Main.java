@@ -29,6 +29,7 @@ public class Main {
         System.out.println("Bienvenido al gestor que tareas");
         System.out.println("¿ Cual va a ser el nombre del proyecto ?");
         Proyecto proyecto = new Proyecto(pedirDato("Nombre del proyecto", scaner));
+        //
 
         //Menu infinito hasta que se pulse la tecla 7
         boolean salir = true;
@@ -80,8 +81,8 @@ public class Main {
                                     bucle_activo = false;
 
                                     if (proyecto.getTareas().size() != 0) {
-                                        for (int i = 0; i < proyecto.getTareas().size(); i++) {
-                                            if (proyecto.getTareas().get(i).getTitulo().equals(titulo) && proyecto.getTareas().get(i).getTitulo() != "") {
+                                        for (Tarea tarea : proyecto.getTareas()){
+                                            if (tarea.getTitulo().equals(titulo) && tarea.getTitulo() != "") {
                                                 bucle_activo = true;
                                             }
                                         }
@@ -107,11 +108,11 @@ public class Main {
 
                                         if (!nombre.equals("1")) {
                                             if (proyecto.getPersonas().size() != 0) {
-                                                for (int i = 0; i < proyecto.getPersonas().size(); i++) {
-                                                    if (nombre.equals(proyecto.getPersonas().get(i).getNombre())) {
+                                                for (Persona persona: proyecto.getPersonas()){
+                                                    if (nombre.equals(persona.getNombre())) {
                                                         System.out.println("El usuario es valido\n");
                                                         hayPersonas = true;
-                                                        personas_tarea.add(proyecto.getPersonas().get(i));
+                                                        personas_tarea.add(persona);
                                                         break;
                                                     }
                                                 }
@@ -142,11 +143,11 @@ public class Main {
                                         String nombre = scaner.nextLine();
 
                                         if (personas_tarea.size() != 0) {
-                                            for (int i = 0; i < personas_tarea.size(); i++) {
-                                                if (nombre.equals(personas_tarea.get(i).getNombre())) {
+                                            for (Persona persona: personas_tarea){
+                                                if (nombre.equals(persona.getNombre())) {
                                                     System.out.println("El usuario es valido\n");
                                                     bucle_activo = false;
-                                                    persona_responsable = personas_tarea.get(i);
+                                                    persona_responsable = persona;
                                                     hayPersonas = true;
                                                     break;
                                                 }
@@ -268,8 +269,8 @@ public class Main {
                                     if (pedirNumeroEnRango(1, 2, scaner, "¿ Quires añadir una etiqueta ?\n\t1 - Si\n\t2 - No") == 1) {
                                         if (etiquetas.isEmpty()) {
                                             etiqueta = pedirDato("Nombre de la Etiqueta", scaner);
-                                            for (int i = 0; i < etiquetas.size(); i++) {
-                                                if (etiquetas.get(i).equals(etiqueta)) {
+                                            for (String etique: etiquetas){
+                                                if (etique.equals(etiqueta)) {
                                                     System.out.println("Las etiquetas no pueden estar repetidas \n");
                                                 }
                                             }
@@ -453,11 +454,12 @@ public class Main {
 
             if (mather.find()) {
                 if (proyecto.getPersonas().size() != 0) {
-                    for (int i = 0; i < proyecto.getPersonas().size(); i++) {
-                        if (proyecto.getPersonas().get(i).getEmail().equals(email) && proyecto.getPersonas().get(i).getEmail() != "") {
+                    for (Persona persona: proyecto.getPersonas()){
+                        if (persona.getEmail().equals(email) && persona.getEmail() != "") {
                             nombre_no_repe = true;
                         }
                     }
+
 
                     if (nombre_no_repe) {
                         System.out.println("Este email ya esta registrado, porfavor pruebe otro.\n");

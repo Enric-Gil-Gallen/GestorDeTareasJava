@@ -37,9 +37,9 @@ public class Proyecto {
     }
 
     public Tarea buscarTareaPorTitulo(String titulo){
-        for (int i = 0; i < tareas.size(); i++){
-            if (tareas.get(i).getTitulo().equals(titulo)){
-                return tareas.get(i);
+        for (Tarea tarea: tareas){
+            if (tarea.getTitulo().equals(titulo)){
+                return tarea;
             }
         }
         System.out.println("El titulo no pertenece a ninguna tarea");
@@ -53,9 +53,9 @@ public class Proyecto {
         }
         else {
             System.out.println("Los integrantes del proyecto son:");
-            for (int i = 0; i < personas.size(); i++){
-                System.out.println("\t - "+personas.get(i).getNombre());
-                System.out.println("\t \t - "+personas.get(i).getEmail());
+            for (Persona persona: personas){
+                System.out.println("\t - "+persona.getNombre());
+                System.out.println("\t \t - "+persona.getEmail());
             }
         }
     }
@@ -68,18 +68,18 @@ public class Proyecto {
         else {
             StringBuilder sb = new StringBuilder();
             sb.append("\n");
-            for (int i = 0; i < tareas.size(); i++){
-                sb.append("Titulo: " +tareas.get(i).getTitulo());
+            for (Tarea tarea: tareas){
+                sb.append("Titulo: " +tarea.getTitulo());
                 sb.append("\n");
-                sb.append(tareas.get(i).getPersonasYResponsable());
+                sb.append(tarea.getPersonasYResponsable());
                 sb.append("\n");
-                if (tareas.get(i).getTarea_Finalizada()){
+                if (tarea.getTarea_Finalizada()){
                     sb.append("La tarea esta finalizada \n");
                 }
                 else {
                     sb.append("La tarea no esta finalizada \n");
                 }
-                sb.append(tareas.get(i).getResultado_Esperado().getResultadoyInformacion());
+                sb.append(tarea.getResultado_Esperado().getResultadoyInformacion());
                 sb.append("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
             }
             return sb.toString();
