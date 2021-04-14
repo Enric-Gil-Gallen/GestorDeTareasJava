@@ -64,7 +64,7 @@ public class Tarea {
             StringBuilder sb = new StringBuilder();
             sb.append("Personas en el proyecto:");
             if (responsable_Tarea != null && responsable_Tarea.getNombre().equals("")){
-                System.out.println("\t - No exite persona responsable");
+                sb.append("- No exite persona responsable");
             }
             sb.append("\n");
             for (Persona persona : personas){
@@ -92,13 +92,14 @@ public class Tarea {
         return false;
     }
 
-    public void añadirPersona(Persona persona){
-            if (!personaExistePorEmail(persona.getEmail())){
-                personas.add(persona);
-            }
-            else {
-                System.out.println("La persona ya esta el la tarea");
-            }
+    public boolean añadirPersona(Persona persona){
+        if (!personaExistePorEmail(persona.getEmail())){
+            personas.add(persona);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public Persona cojerPersonaPorEmail(String email){
@@ -117,12 +118,14 @@ public class Tarea {
         return false;
     }
 
-    public void eliminarPersona(String email){
+    public boolean eliminarPersona(String email){
+        boolean personaResponsable = false;
         if (esLaPersonaResponsableEmail(email)){
             responsable_Tarea = null;
-            System.out.println("La persona responsable tambien a sido eliminada");
+            personaResponsable = true;
         }
         personas.remove(cojerPersonaPorEmail(email));
+        return personaResponsable;
     }
 }
 

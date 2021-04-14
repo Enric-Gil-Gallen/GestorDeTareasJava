@@ -319,6 +319,7 @@ public class Main {
 
                         Tarea tarea = proyecto.buscarTareaPorTitulo(tareaNombre);
                         while (tarea == null) {
+                            System.out.println("El titulo no pertenece a ninguna tarea");
                             tareaNombre = pedirDato("Introduce el titulo de la tarea", scaner);
                             tarea = proyecto.buscarTareaPorTitulo(tareaNombre);
                         }
@@ -329,7 +330,10 @@ public class Main {
                                 if (!proyecto.getPersonas().isEmpty()){
                                     Persona persona = proyecto.buscarPersonaEmail(pedirDato("Email", scaner));
                                     persona.cargarTarea(tarea);
-                                    tarea.añadirPersona(persona);
+                                    if(!tarea.añadirPersona(persona)){
+                                        System.out.println("La persona ya esta el la tarea");
+                                    }
+
                                 }
                                 else {
                                     System.out.println("No se puede añadir la persona");
@@ -341,7 +345,9 @@ public class Main {
                                     System.out.println("Dime el email de la persona que desea eliminar: ");
                                     String email = pedirDato("\tEmail", scaner);
                                     if (tarea.personaExistePorEmail(email)) {
-                                        tarea.eliminarPersona(email);
+                                        if (!tarea.eliminarPersona(email)){
+                                            System.out.println("La persona responsable tambien a sido eliminada");
+                                        }
                                     }
                                 }
                                 else {

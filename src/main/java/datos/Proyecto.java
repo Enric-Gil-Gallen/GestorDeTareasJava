@@ -42,7 +42,6 @@ public class Proyecto {
                 return tarea;
             }
         }
-        System.out.println("El titulo no pertenece a ninguna tarea");
         return null;
     }
 
