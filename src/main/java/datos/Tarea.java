@@ -62,7 +62,7 @@ public class Tarea {
         }
         else {
             StringBuilder sb = new StringBuilder();
-            sb.append("Personas en el proyecto:");
+            sb.append("Personas en la tarea:");
             if (responsable_Tarea != null && responsable_Tarea.getNombre().equals("")){
                 sb.append("- No exite persona responsable");
             }

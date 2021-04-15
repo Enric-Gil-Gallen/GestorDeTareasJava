@@ -52,10 +52,10 @@ public class Proyecto {
             sb.append("No hay ninguna persona registrada el en proyecto");
         }
         else {
-            sb.append("Los integrantes del proyecto son:");
+            sb.append("Los integrantes del proyecto son:\n");
             for (Persona persona: personas){
-                sb.append("\t - "+persona.getNombre());
-                sb.append("\t \t - "+persona.getEmail());
+                sb.append("\t -Nombre: "+persona.getNombre()+"\n");
+                sb.append("\t -Email: "+persona.getEmail() + "\n \n");
             }
         }
         return sb.toString();
