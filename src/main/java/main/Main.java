@@ -362,7 +362,7 @@ public class Main {
                     break;
 
                 case 6:
-                    proyecto.personasDelProyecto();
+                    System.out.println(proyecto.personasDelProyecto());
                     break;
 
                 case 7:

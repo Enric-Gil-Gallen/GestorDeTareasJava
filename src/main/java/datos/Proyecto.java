@@ -46,17 +46,19 @@ public class Proyecto {
     }
 
     //Método que devuelve las personas implicadas en el proyecto
-    public void personasDelProyecto(){
+    public String personasDelProyecto(){
+        StringBuilder sb = new StringBuilder();
         if (personas.isEmpty()){
-            System.out.println("No hay ninguna persona registrada el en proyecto");
+            sb.append("No hay ninguna persona registrada el en proyecto");
         }
         else {
-            System.out.println("Los integrantes del proyecto son:");
+            sb.append("Los integrantes del proyecto son:");
             for (Persona persona: personas){
-                System.out.println("\t - "+persona.getNombre());
-                System.out.println("\t \t - "+persona.getEmail());
+                sb.append("\t - "+persona.getNombre());
+                sb.append("\t \t - "+persona.getEmail());
             }
         }
+        return sb.toString();
     }
 
     //Método para listar las tareas de un proyecto dado
