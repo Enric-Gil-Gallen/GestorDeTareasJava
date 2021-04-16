@@ -1,5 +1,6 @@
 package datos;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 public class Tarea {
@@ -8,13 +9,13 @@ public class Tarea {
     LinkedList<Persona> personas;
     Persona responsable_Tarea;
     int prioridad; // Entre 1: muy baja, y 5: muy alta
-    Fecha fecha_Creacion;
-    Fecha fecha_Finalizacion;
+    Date fecha_Creacion;
+    Date fecha_Finalizacion;
     Boolean tarea_Finalizada;
     Resultado resultado_Esperado;
     LinkedList etiquetas;
 
-    public Tarea(String titulo, String descripcion, LinkedList<Persona> personas, Persona responsable_Tarea, int prioridad, Fecha fecha_Creacion, Fecha fecha_Finalizacion, Boolean tarea_Finalizada, Resultado resultado_Esperado, LinkedList etiquetas) {
+    public Tarea(String titulo, String descripcion, LinkedList<Persona> personas, Persona responsable_Tarea, int prioridad, Date fecha_Creacion, Date fecha_Finalizacion, Boolean tarea_Finalizada, Resultado resultado_Esperado, LinkedList etiquetas) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.personas = personas;
