@@ -9,7 +9,7 @@ import datos.resultados.Documento;
 import datos.resultados.Pagina_web;
 import datos.resultados.Programa;
 
-import java.text.ParseException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -32,6 +32,7 @@ public class Main {
     static int opcion;
 
     public static void main(String[] args) {
+        leerTodosLosDatos();
         System.out.println("Bienvenido al gestor que tareas");
         System.out.println("¿ Cual va a ser el nombre del proyecto ?");
 
@@ -70,6 +71,7 @@ public class Main {
 
                 case 8:
                     scaner.close();
+                    escribirTxt();
                     salir = false;
                     break;
 
@@ -84,8 +86,25 @@ public class Main {
 
     }
 
+    // METODOS PARA CARGAR Y GUARDAR TXT
+    public static void leerTodosLosDatos(){
+
+    }
+
+    public static void leerTxt(String dirrecion){
+        try {
+            FileReader entrada = new FileReader(dirrecion);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void escribirTxt(){
+
+    }
+
     // METODOS PARA EL FUNCIONAMIENTO DEL MENU
-    public static int leer() {
+    public static int comprobarQueEsUnNumero() {
         while (true) {
             try {
                 return scaner.nextInt();
@@ -104,7 +123,7 @@ public class Main {
         int opcion = 0;
 
         // Comprobar que el numero sea el indicado
-        opcion = leer(); // Comprobamos que sea un numero lo que nos pasan
+        opcion = comprobarQueEsUnNumero(); // Comprobamos que sea un numero lo que nos pasan
 
         return opcion;
     }
@@ -112,10 +131,10 @@ public class Main {
     // Metodo que pide por pantalla
     public static String pedirDato(String nombreDato) {
         String resul = "";
-        while (resul == ""){
+        while (resul.isEmpty()){
             System.out.println(nombreDato + ": ");
             resul = scaner.nextLine();
-            if (resul==""){
+            if (resul.isEmpty()){
                 System.out.println("No puedes introducir el campo vacio\n");
             }
         }
@@ -134,15 +153,12 @@ public class Main {
 
     // Pide un numero en un rango correcto
     public static int pedirNumeroEnRango(int minimo, int maximo , String mensaje) {
-        boolean bucle_activo = true;
-        while (bucle_activo) {
+        while (true) {
             int opcino_prioridad = pedirNumero( mensaje);
             if (rangoCorrecto(minimo, maximo, opcino_prioridad)) {
-                bucle_activo = false;
                 return opcino_prioridad;
             }
         }
-        return 0;
     }
 
     public static Date pedirFecha() {
@@ -150,10 +166,10 @@ public class Main {
         int mes = pedirNumeroEnRango(1, 12, "Dia: (Del 1 al 12)");
         int año = pedirNumeroEnRango(2021, 2100, "Dia: (Del 2021 al 2100)");
         Date fecha = new Date(año-1900, mes-1, dia);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaFormateada = sdf.format(fecha);
-        System.out.println("Fecha" + fecha.toString());
-        System.out.println("Fecha formateada: " + fechaFormateada);
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        String fechaFormateada = sdf.format(fecha);
+//        System.out.println("Fecha" + fecha.toString());
+//        System.out.println("Fecha formateada: " + fechaFormateada);
         return fecha;
     }
 
