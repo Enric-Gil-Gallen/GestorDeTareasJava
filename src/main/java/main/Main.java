@@ -73,11 +73,11 @@ public class Main {
                 case 8:
                     scaner.close();
                     salir = false;
-//                    String ruta = "\\src\\main\\java\\main\\txt";
-                    escribirTxt("Proyecto", "proyecto.txt");
-                    escribirTxt("Personas", "personas.txt");
-                    escribirTxt("Tareas", "tareas.txt");
-                    escribirTxt("Resultados", "resultados.txt");
+                    String ruta = "src/main/java/main/txt/";
+                    escribirTxt("Proyecto", ruta + "proyecto.txt");
+                    escribirTxt("Personas", ruta + "personas.txt");
+                    escribirTxt("Tareas", ruta + "tareas.txt");
+                    escribirTxt("Resultados", ruta + "resultados.txt");
                     break;
 
                 default:
