@@ -1,2 +1,0 @@
-1#50.0#EXTERNO#Español#Documento#999#40
-2#70.0#INTERNO#PHP#Pagina Web#ESTATICA#Laravel

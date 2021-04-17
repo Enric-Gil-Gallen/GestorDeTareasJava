@@ -27,14 +27,16 @@ public class Main {
 
     // Variables para el funcionamiento
     static Scanner scaner = new Scanner(System.in);
-    static Proyecto proyecto = new Proyecto(pedirDato("Nombre del proyecto"));
     static boolean activo = true;
     static int opcion;
+    static String ruta = "src/main/java/main/txt/";
+    static Proyecto proyecto = new Proyecto(leerProyecto(ruta + "proyecto.txt"));
+
 
     public static void main(String[] args) {
         leerTodosLosDatos();
 
-        System.out.println("Bienvenido al gestor que tareas");
+        System.out.println("\nBienvenido al gestor que tareas");
         System.out.println("¿ Cual va a ser el nombre del proyecto ?");
 
         //Menu infinito hasta que se pulse la tecla 7
@@ -73,11 +75,7 @@ public class Main {
                 case 8:
                     scaner.close();
                     salir = false;
-                    String ruta = "src/main/java/main/txt/";
-                    escribirTxt("Proyecto", ruta + "proyecto.txt");
-                    escribirTxt("Personas", ruta + "personas.txt");
-                    escribirTxt("Tareas", ruta + "tareas.txt");
-                    escribirTxt("Resultados", ruta + "resultados.txt");
+                    escribirSalida();
                     break;
 
                 default:
@@ -93,10 +91,12 @@ public class Main {
 
     // METODOS PARA CARGAR Y GUARDAR TXT
     public static void leerTodosLosDatos(){
-
+        leerTxt("Personas", ruta + "personas.txt");
+        leerTxt("Tareas", ruta + "tareas.txt");
+        leerTxt("Resultados", ruta + "resultados.txt");
     }
 
-    public static void leerTxt(String dirrecion){
+    public static String leerProyecto(String dirrecion){
         FileReader fichero = null;
         try {
             // Cojemos el fichero
@@ -105,20 +105,11 @@ public class Main {
             // Se lo pasamos a un Buffer, que es como una "memoria", la cual va almacenando contido del fichero mientras lee el resto
             BufferedReader bf = new BufferedReader(fichero);
 
-            String linea = "";
+            return bf.readLine();
 
-
-            while (linea != null){
-                // Almacena el contenido de una linea
-                // Que parara al encontrar un "\n"
-                linea = bf.readLine();
-                // Rellenar el Objeto
-                if (linea != null){   // Para que no coja el null final
-//                    proyecto.añadirPersonas((Persona) linea);
-                }
-            }
         } catch (IOException e){
-            System.out.println("No se ha encontrado el archivo");
+            System.out.println("No se ha encontrado el archivo ");
+            return pedirDato("Nombre del proyecto:");
         } finally {
             try {
                 fichero.close();
@@ -126,6 +117,61 @@ public class Main {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void leerTxt(String tipo, String dirrecion){
+        try {
+            // Cojemos el fichero
+            FileReader fichero = new FileReader(dirrecion);
+
+            // Se lo pasamos a un Buffer, que es como una "memoria", la cual va almacenando contido del fichero mientras lee el resto
+            BufferedReader bf = new BufferedReader(fichero);
+
+            if (tipo.equals("Personas")) leerPersonsa(bf);
+            if (tipo.equals("Tareas")) leerTareas(bf);
+            if (tipo.equals("Resultados")) leerResultados(bf);
+
+            fichero.close();
+        } catch (IOException e){
+            System.out.println("No se ha encontrado el fichero: " + tipo);
+        }
+    }
+
+    public static void leerPersonsa(BufferedReader bf){
+        try {
+            String linea = "";
+            LinkedList<Tarea> lista = new LinkedList<Tarea>();
+            while (linea != null){
+                // Almacena el contenido de una linea
+                // Que parara al encontrar un "\n"
+                linea = bf.readLine();
+
+                // Rellenar el Objeto
+                if (linea != null){   // Para que no coja el null final
+                    String[] parts = linea.split("#");
+                    System.out.println(parts[0] + " ------ " +parts[1]);
+                    String nombre = parts[0];
+                    String email = parts[1];
+                    proyecto.añadirPersonas(new Persona(nombre, email, lista));
+                }
+            }
+        } catch (IOException e){
+            System.out.println("No se ha podido encontrar el arcivo");
+        }
+    }
+
+    public static void leerTareas(BufferedReader bf){
+
+    }
+
+    public static void leerResultados(BufferedReader bf){
+
+    }
+
+    public static void escribirSalida(){
+        escribirTxt("Personas", ruta + "personas.txt");
+        escribirTxt("Tareas", ruta + "tareas.txt");
+        escribirTxt("Resultados", ruta + "resultados.txt");
     }
 
     public static void escribirTxt(String tipo ,String ruta){
