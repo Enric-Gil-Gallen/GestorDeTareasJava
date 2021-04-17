@@ -10,10 +10,10 @@ import java.util.Scanner;
 
 public class Proyecto {
     // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
-    LinkedList<Persona> personas = new LinkedList();
-    LinkedList<Tarea> tareas = new LinkedList();
-    LinkedList<Resultado> resultados = new LinkedList();
-    String nombre;
+    private LinkedList<Persona> personas = new LinkedList();
+    private LinkedList<Tarea> tareas = new LinkedList();
+    private LinkedList<Resultado> resultados = new LinkedList();
+    private String nombre;
 
     public Proyecto(String nombre) {
         this.nombre = nombre;
@@ -36,6 +36,9 @@ public class Proyecto {
         tareas.add(tarea);
     }
 
+    public void añadirResultado(Resultado resultado){
+        resultados.add(resultado);
+    }
     public Tarea buscarTareaPorTitulo(String titulo){
         for (Tarea tarea: tareas){
             if (tarea.getTitulo().equals(titulo)){
@@ -43,6 +46,14 @@ public class Proyecto {
             }
         }
         return null;
+    }
+
+    public LinkedList<Resultado> getResultados() {
+        return resultados;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     //Método que devuelve las personas implicadas en el proyecto

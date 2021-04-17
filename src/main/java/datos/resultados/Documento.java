@@ -3,8 +3,8 @@ package datos.resultados;
 import datos.Resultado;
 
 public class Documento extends Resultado {
-    int num_paguinas;
-    int num_modulos;
+    private int num_paguinas;
+    private int num_modulos;
 
     public Documento(int id, double horas_totolal, Enum tipo_Int_Ext, String lenguaje, String nombre, int num_paguinas, int num_modulos) {
         super(id, horas_totolal, tipo_Int_Ext, lenguaje, "Documento");
@@ -20,6 +20,16 @@ public class Documento extends Resultado {
         sb.append("\t"+" - Numero de modulos: " + num_modulos);
         sb.append("\n");
 
+        return sb.toString();
+    }
+
+    @Override
+    public String ponerDatosEnLinea() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.ponerDatosEnLinea());
+        sb.append(num_paguinas);
+        sb.append("#");
+        sb.append(num_modulos);
         return sb.toString();
     }
 }

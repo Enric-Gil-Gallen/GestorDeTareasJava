@@ -3,8 +3,8 @@ package datos.resultados;
 import datos.Resultado;
 
 public class Biblioteca extends Resultado {
-    int num_lineas;
-    int num_modulos;
+    private int num_lineas;
+    private int num_modulos;
 
     public Biblioteca(int id, double horas_totolal, Enum tipo_Int_Ext, String lenguaje, String nombre, int num_lineas, int num_modulos) {
         super(id, horas_totolal, tipo_Int_Ext, lenguaje, "Biblioteca");
@@ -24,4 +24,13 @@ public class Biblioteca extends Resultado {
         return sb.toString();
     }
 
+    @Override
+    public String ponerDatosEnLinea() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.ponerDatosEnLinea());
+        sb.append(num_lineas);
+        sb.append("#");
+        sb.append(num_modulos);
+        return sb.toString();
+    }
 }

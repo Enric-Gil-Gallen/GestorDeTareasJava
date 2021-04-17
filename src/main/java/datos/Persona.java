@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Persona {
-    String nombre;
-    String email;
-    LinkedList<Tarea> tareas_lista;
+    private String nombre;
+    private String email;
+    private LinkedList<Tarea> tareas_lista;
 
     public Persona(String nombre, String email, LinkedList<Tarea> tareas_lista) {
         this.nombre = nombre;
@@ -37,6 +37,20 @@ public class Persona {
         if(!tareas_lista.contains(tarea)){
             tareas_lista.add(tarea);
         }
+    }
+
+    public String ponerDatosEnLinea(){
+        StringBuilder linea = new StringBuilder();
+        linea.append(nombre);
+        linea.append("#");
+        linea.append(email);
+        linea.append("#");
+        StringBuilder nombreTareas = new StringBuilder();
+        for (int i = 0; i < tareas_lista.size(); i++){
+            nombreTareas.append(tareas_lista.get(i).getTitulo()).append("&");
+        }
+        linea.append(nombreTareas);
+        return linea.toString();
     }
 
 }

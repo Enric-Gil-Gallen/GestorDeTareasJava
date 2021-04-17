@@ -1,19 +1,20 @@
 package datos;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
 public class Tarea {
-    String titulo; // Tiene que ser unico, es el ID
-    String descripcion;
-    LinkedList<Persona> personas;
-    Persona responsable_Tarea;
-    int prioridad; // Entre 1: muy baja, y 5: muy alta
-    Date fecha_Creacion;
-    Date fecha_Finalizacion;
-    Boolean tarea_Finalizada;
-    Resultado resultado_Esperado;
-    LinkedList etiquetas;
+    private String titulo; // Tiene que ser unico, es el ID
+    private String descripcion;
+    private LinkedList<Persona> personas;
+    private Persona responsable_Tarea;
+    private int prioridad; // Entre 1: muy baja, y 5: muy alta
+    private Date fecha_Creacion;
+    private Date fecha_Finalizacion;
+    private Boolean tarea_Finalizada;
+    private Resultado resultado_Esperado;
+    private LinkedList<String> etiquetas;
 
     public Tarea(String titulo, String descripcion, LinkedList<Persona> personas, Persona responsable_Tarea, int prioridad, Date fecha_Creacion, Date fecha_Finalizacion, Boolean tarea_Finalizada, Resultado resultado_Esperado, LinkedList etiquetas) {
         this.titulo = titulo;
@@ -127,6 +128,49 @@ public class Tarea {
         }
         personas.remove(cojerPersonaPorEmail(email));
         return personaResponsable;
+    }
+
+    public String ponerDatosEnLinea(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(titulo);
+        sb.append("#");
+        sb.append(descripcion);
+        sb.append("#");
+        if (personas != null){
+            StringBuilder emailPersonas = new StringBuilder();
+            for (int i = 0; i < personas.size(); i++){
+                emailPersonas.append(personas.get(i).getEmail()).append("&");
+            }
+            sb.append(emailPersonas);
+        }
+        else {
+            sb.append("null");
+        }
+        sb.append("#");
+        sb.append(prioridad);
+        sb.append("#");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaFormateada = sdf.format(fecha_Creacion);
+        sb.append(fechaFormateada);
+        sb.append("#");
+        if (fecha_Finalizacion != null){
+            fechaFormateada = sdf.format(fecha_Finalizacion);
+            sb.append(fechaFormateada);
+        }
+        else {
+            sb.append("null");
+        }
+        sb.append("#");
+        sb.append(tarea_Finalizada);
+        sb.append("#");
+        sb.append(resultado_Esperado.getId());
+        sb.append("#");
+        StringBuilder etiquetasLinea = new StringBuilder();
+        for (String etiqueta: etiquetas){
+            etiquetasLinea.append(etiqueta).append("&");
+        }
+        sb.append(etiquetasLinea);
+        return sb.toString();
     }
 }
 

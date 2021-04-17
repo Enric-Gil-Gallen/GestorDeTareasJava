@@ -3,8 +3,8 @@ package datos.resultados;
 import datos.Resultado;
 
 public class Pagina_web extends Resultado {
-    Enum estado;
-    String back_tipo;
+    private Enum estado;
+    private String back_tipo;
 
     public Pagina_web(int id, double horas_totolal, Enum tipo_Int_Ext, String lenguaje, String nombre, Enum estado, String back_tipo) {
         super(id, horas_totolal, tipo_Int_Ext, lenguaje, "Pagina Web");
@@ -21,6 +21,15 @@ public class Pagina_web extends Resultado {
         sb.append("\t"+" - Backend utilizado: " + back_tipo);
         sb.append("\n");
 
+        return sb.toString();
+    }
+    @Override
+    public String ponerDatosEnLinea() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.ponerDatosEnLinea());
+        sb.append(estado.toString());
+        sb.append("#");
+        sb.append(back_tipo);
         return sb.toString();
     }
 }
