@@ -35,7 +35,7 @@ public class Main implements Serializable{
     public static void main(String[] args) {
         System.out.println("\nBienvenido al gestor que tareas");
         if (existeProyectoAnterir(ruta)){
-            System.out.println("Se ha cargardo un Proyecto Anterior\n");
+            System.out.println("Se ha cargado un Proyecto Anterior\n");
             cargarProyecto();
         }
         else {
@@ -77,6 +77,14 @@ public class Main implements Serializable{
                     break;
 
                 case 8:
+                    System.out.println(proyecto.personasSinTareas());
+                    break;
+
+                case 9:
+                    System.out.println(proyecto.tareasSinAsignar());
+                    break;
+
+                case 10:
                     scaner.close();
                     salir = false;
                     guardarProyecto();
@@ -417,7 +425,7 @@ public class Main implements Serializable{
 
         }
         catch (IOException e){
-            System.out.println("No exite el fichero: " + ruta);
+            System.out.println("No existe el fichero: " + ruta);
         }
         catch (ClassNotFoundException e){
             System.out.println("No se ha podido cargar el proyecto");
@@ -587,7 +595,13 @@ public class Main implements Serializable{
 
     }
 
-    // Opcion 8 -- Salir
+    //Opcion 8 -- Listar personas que no son responsables de ninguna tarea
+
+
+    //Opcion 9 -- Obtener un listado de tareas que no tienen ninguna persona asignada
+
+
+    // Opcion 10 -- Salir
     public static void guardarProyecto(){
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));

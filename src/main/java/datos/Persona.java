@@ -40,4 +40,12 @@ public class Persona implements Serializable {
         }
     }
 
+    public boolean getPersonaSinTareas(){
+        if(tareas_lista.isEmpty()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

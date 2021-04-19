@@ -131,5 +131,13 @@ public class Tarea implements Serializable {
         return personaResponsable;
     }
 
+    public boolean getTareaSinPersonas(){
+        if (personas.isEmpty()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 

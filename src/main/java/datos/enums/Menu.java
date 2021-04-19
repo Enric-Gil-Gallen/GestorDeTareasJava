@@ -10,8 +10,9 @@ public enum Menu implements Serializable {
     INTRODUCIR_O_ELIMINAR_PERSONA_TAREA("Introducir o eliminar una persona de una tarea"),
     LISTAR_PERSONAS_PROYECTO("Listar las personas asignadas a un proyecto"),
     LISTAR_TAREAS_PROYECTO("Listar las tareas de un proyecto"),
+    LISTAR_PERSONAS_NO_RESPONSABLES("Listar las personas que no son responsables de ninguna tarea"),
+    LISTAR_TAREAS_SIN_PERSONAS("Listar las tareas que no tienen ninguna persona asignada"),
     SALIR("Salir");
-
 
 
     private String descripcion;
