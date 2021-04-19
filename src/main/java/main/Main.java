@@ -80,7 +80,7 @@ public class Main implements Serializable{
                     break;
 
                 case 9:
-
+                    tareasSinPersonaAsignada();
                     break;
 
                 case 10:
@@ -595,8 +595,14 @@ public class Main implements Serializable{
     }
 
     //Opcion 8 -- Listar personas que no son responsables de ninguna tarea
+    public static void personasNoResponsablesTareas() {
+
+    }
 
     //Opcion 9 -- Obtener un listado de tareas que no tienen ninguna persona asignada
+    public static void tareasSinPersonaAsignada(){
+
+    }
 
     // Opcion 10 -- Salir
     public static void guardarProyecto(){
