@@ -116,6 +116,35 @@ public class Proyecto implements Serializable{
         return resul;
     }
 
+    //Método para personas que no tienen ninguna tarea asignada
+    public String personasSinTareas(){
+        if (personas.isEmpty()){
+            return "No hay personas en el proyecto actual";
+        } else {
+            String personasSinTareasAsignadas = "";
+            for (Persona persona : personas){
+                if (persona.getPersonaSinTareas() == true){
+                    personasSinTareasAsignadas += " " + persona.getNombre() + ",";
+                }
+            }
+            return personasSinTareasAsignadas;
+        }
+    }
+
+    //Método para tareas que no tienen ninguna persona asignada
+    public String tareasSinAsignar(){
+        if (tareas.isEmpty()){
+            return "No hay tareas en el proyecto actual";
+        } else {
+            String tareasNoAsignadas = "";
+            for (Tarea tarea : tareas){
+                if (tarea.getTareaSinPersonas() == true){
+                    tareasNoAsignadas += " " + tarea.getTitulo() + ",";
+                }
+            }
+            return tareasNoAsignadas;
+        }
+    }
 
 }
 
