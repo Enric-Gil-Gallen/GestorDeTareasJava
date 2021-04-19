@@ -108,7 +108,7 @@ public class Proyecto implements Serializable{
             String personasSinTareasAsignadas = "";
             for (Persona persona : personas){
                 if (persona.getPersonaSinTareas() == true){
-                    personasSinTareasAsignadas = " " + persona.getNombre() + ",";
+                    personasSinTareasAsignadas += " " + persona.getNombre() + ",";
                 }
             }
             return personasSinTareasAsignadas;
@@ -123,7 +123,7 @@ public class Proyecto implements Serializable{
             String tareasNoAsignadas = "";
             for (Tarea tarea : tareas){
                 if (tarea.getTareaSinPersonas() == true){
-                    tareasNoAsignadas = " " + tarea.getTitulo() + ",";
+                    tareasNoAsignadas += " " + tarea.getTitulo() + ",";
                 }
             }
             return tareasNoAsignadas;
