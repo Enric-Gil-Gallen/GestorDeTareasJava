@@ -39,18 +39,4 @@ public class Persona {
         }
     }
 
-    public String ponerDatosEnLinea(){
-        StringBuilder linea = new StringBuilder();
-        linea.append(nombre);
-        linea.append("#");
-        linea.append(email);
-        linea.append("#");
-        StringBuilder nombreTareas = new StringBuilder();
-        for (int i = 0; i < tareas_lista.size(); i++){
-            nombreTareas.append(tareas_lista.get(i).getTitulo()).append("&");
-        }
-        linea.append(nombreTareas);
-        return linea.toString();
-    }
-
 }

@@ -23,13 +23,5 @@ public class Pagina_web extends Resultado {
 
         return sb.toString();
     }
-    @Override
-    public String ponerDatosEnLinea() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(super.ponerDatosEnLinea());
-        sb.append(estado.toString());
-        sb.append("#");
-        sb.append(back_tipo);
-        return sb.toString();
-    }
+
 }

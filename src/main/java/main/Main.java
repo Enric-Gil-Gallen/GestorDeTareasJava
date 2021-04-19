@@ -30,11 +30,10 @@ public class Main {
     static boolean activo = true;
     static int opcion;
     static String ruta = "src/main/java/main/txt/";
-    static Proyecto proyecto = new Proyecto(leerProyecto(ruta + "proyecto.txt"));
+    static Proyecto proyecto = new Proyecto(pedirDato("Nombre Proyecto"));
 
 
     public static void main(String[] args) {
-        leerTodosLosDatos();
 
         System.out.println("\nBienvenido al gestor que tareas");
         System.out.println("¿ Cual va a ser el nombre del proyecto ?");
@@ -75,7 +74,6 @@ public class Main {
                 case 8:
                     scaner.close();
                     salir = false;
-                    escribirSalida();
                     break;
 
                 default:
@@ -87,163 +85,6 @@ public class Main {
 
         System.out.println("Gracias por su uso");
 
-    }
-
-    // METODOS PARA CARGAR Y GUARDAR TXT
-    public static void leerTodosLosDatos(){
-        leerTxt("Personas", ruta + "personas.txt");
-        leerTxt("Tareas", ruta + "tareas.txt");
-        leerTxt("Resultados", ruta + "resultados.txt");
-    }
-
-    public static String leerProyecto(String dirrecion){
-        FileReader fichero = null;
-        try {
-            // Cojemos el fichero
-            fichero = new FileReader(dirrecion);
-
-            // Se lo pasamos a un Buffer, que es como una "memoria", la cual va almacenando contido del fichero mientras lee el resto
-            BufferedReader bf = new BufferedReader(fichero);
-
-            return bf.readLine();
-
-        } catch (IOException e){
-            System.out.println("No se ha encontrado el archivo ");
-            return pedirDato("Nombre del proyecto:");
-        } finally {
-            try {
-                fichero.close();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void leerTxt(String tipo, String dirrecion){
-        try {
-            // Cojemos el fichero
-            FileReader fichero = new FileReader(dirrecion);
-
-            // Se lo pasamos a un Buffer, que es como una "memoria", la cual va almacenando contido del fichero mientras lee el resto
-            BufferedReader bf = new BufferedReader(fichero);
-
-            if (tipo.equals("Personas")) leerPersonsa(bf);
-            if (tipo.equals("Tareas")) leerTareas(bf);
-            if (tipo.equals("Resultados")) leerResultados(bf);
-
-            fichero.close();
-        } catch (IOException e){
-            System.out.println("No se ha encontrado el fichero: " + tipo);
-        }
-    }
-
-    public static void leerPersonsa(BufferedReader bf){
-        try {
-            String linea = "";
-            LinkedList<Tarea> lista = new LinkedList<Tarea>();
-            while (linea != null){
-                // Almacena el contenido de una linea
-                // Que parara al encontrar un "\n"
-                linea = bf.readLine();
-
-                // Rellenar el Objeto
-                if (linea != null){   // Para que no coja el null final
-                    String[] parts = linea.split("#");
-                    System.out.println(parts[0] + " ------ " +parts[1]);
-                    String nombre = parts[0];
-                    String email = parts[1];
-                    proyecto.añadirPersonas(new Persona(nombre, email, lista));
-                }
-            }
-        } catch (IOException e){
-            System.out.println("No se ha podido encontrar el arcivo");
-        }
-    }
-
-    public static void leerTareas(BufferedReader bf){
-
-    }
-
-    public static void leerResultados(BufferedReader bf){
-
-    }
-
-    public static void escribirSalida(){
-        escribirTxt("Personas", ruta + "personas.txt");
-        escribirTxt("Tareas", ruta + "tareas.txt");
-        escribirTxt("Resultados", ruta + "resultados.txt");
-    }
-
-    public static void escribirTxt(String tipo ,String ruta){
-
-        try {
-            FileWriter fichero = new FileWriter(ruta);
-            BufferedWriter bf = new BufferedWriter(fichero);
-
-            if (tipo.equals("Personas")) cargarPersonas(bf);
-            if (tipo.equals("Tareas")) cargarTareas(bf);
-            if (tipo.equals("Proyecto")) cargarProyecto(bf);
-            if (tipo.equals("Resultados")) cargarResultados(bf);
-
-            bf.flush();
-        } catch (IOException e){
-            System.out.println("No se ha podido encontrar el arcivo");
-        }
-    }
-
-    public static BufferedWriter cargarPersonas(BufferedWriter bf){
-        try{
-            for (Persona persona: proyecto.getPersonas()){
-                bf.write(persona.ponerDatosEnLinea());
-                bf.write("\n");
-            }
-            return bf;
-        }
-        catch (IOException e){
-            System.out.println("No se ha podido encontrar el arcivo");
-            return null;
-        }
-    }
-
-    public static BufferedWriter cargarTareas(BufferedWriter bf){
-        try{
-            for (Tarea tarea: proyecto.getTareas()){
-                bf.write(tarea.ponerDatosEnLinea());
-                bf.write("\n");
-            }
-            return bf;
-        }
-        catch (IOException e){
-            System.out.println("No se ha podido encontrar el arcivo");
-            return null;
-        }
-    }
-
-    public static BufferedWriter cargarProyecto(BufferedWriter bf){
-        try{
-            bf.write(proyecto.getNombre());
-            bf.write("\n");
-            return bf;
-        }
-        catch (IOException e){
-            System.out.println("No se ha podido encontrar el arcivo");
-            return null;
-        }
-    }
-
-    public static BufferedWriter cargarResultados(BufferedWriter bf){
-        try{
-            System.out.println("El numero de resultodos es: " + proyecto.getResultados().size());
-            for (Resultado resultado: proyecto.getResultados()){
-                bf.append(resultado.ponerDatosEnLinea());
-                bf.append("\n");
-            }
-            return bf;
-        }
-        catch (IOException e){
-            System.out.println("No se ha podido encontrar el arcivo");
-            return null;
-        }
     }
 
     // METODOS PARA EL FUNCIONAMIENTO DEL MENU

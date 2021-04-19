@@ -32,18 +32,4 @@ public abstract class Resultado {
         return sb.toString();
     }
 
-    public String ponerDatosEnLinea(){
-        StringBuilder linea = new StringBuilder();
-        linea.append(id);
-        linea.append("#");
-        linea.append(horas_totolal);
-        linea.append("#");
-        linea.append(tipo_Int_Ext.toString());
-        linea.append("#");
-        linea.append(lenguaje);
-        linea.append("#");
-        linea.append(tipoResultado);
-        linea.append("#");
-        return linea.toString();
-    }
 }

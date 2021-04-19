@@ -130,47 +130,5 @@ public class Tarea {
         return personaResponsable;
     }
 
-    public String ponerDatosEnLinea(){
-        StringBuilder sb = new StringBuilder();
-        sb.append(titulo);
-        sb.append("#");
-        sb.append(descripcion);
-        sb.append("#");
-        if (personas != null){
-            StringBuilder emailPersonas = new StringBuilder();
-            for (int i = 0; i < personas.size(); i++){
-                emailPersonas.append(personas.get(i).getEmail()).append("&");
-            }
-            sb.append(emailPersonas);
-        }
-        else {
-            sb.append("null");
-        }
-        sb.append("#");
-        sb.append(prioridad);
-        sb.append("#");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaFormateada = sdf.format(fecha_Creacion);
-        sb.append(fechaFormateada);
-        sb.append("#");
-        if (fecha_Finalizacion != null){
-            fechaFormateada = sdf.format(fecha_Finalizacion);
-            sb.append(fechaFormateada);
-        }
-        else {
-            sb.append("null");
-        }
-        sb.append("#");
-        sb.append(tarea_Finalizada);
-        sb.append("#");
-        sb.append(resultado_Esperado.getId());
-        sb.append("#");
-        StringBuilder etiquetasLinea = new StringBuilder();
-        for (String etiqueta: etiquetas){
-            etiquetasLinea.append(etiqueta).append("&");
-        }
-        sb.append(etiquetasLinea);
-        return sb.toString();
-    }
 }
 

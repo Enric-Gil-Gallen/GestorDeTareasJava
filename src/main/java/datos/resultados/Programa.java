@@ -22,13 +22,5 @@ public class Programa extends Resultado {
 
         return sb.toString();
     }
-    @Override
-    public String ponerDatosEnLinea() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(super.ponerDatosEnLinea());
-        sb.append(num_lineas);
-        sb.append("#");
-        sb.append(num_modulos);
-        return sb.toString();
-    }
+
 }
