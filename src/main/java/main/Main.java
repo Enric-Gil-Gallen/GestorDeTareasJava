@@ -121,16 +121,14 @@ public class Main implements Serializable{
     // Metodo que pide por pantalla
     public static String pedirDato(String nombreDato) {
         String resul = "";
-        while (true){
+        while (resul == ""){
             System.out.println(nombreDato + ": ");
             resul = scaner.nextLine();
-            if (resul.equals("")){
+            if (resul==""){
                 System.out.println("No puedes introducir el campo vacio\n");
             }
-            else {
-                return resul;
-            }
         }
+        return resul;
     }
 
     // Dice si un numero esta en un rango correcto
@@ -441,7 +439,6 @@ public class Main implements Serializable{
             String num = pedirDato(" ¿Que quieres hacer ?\n" +
                     "\t1 - Introducir persona\n" +
                     "\tCualquier otra tecla - Finalizar");
-            System.out.println(num + " ññññññññññññññññññññññññ");
             try {
                 if (Integer.parseInt(num) == 1) {
                     proyecto.añadirPersonas(añadirPersona(proyecto));
@@ -593,6 +590,10 @@ public class Main implements Serializable{
     // Opcion 8 -- Salir
     public static void guardarProyecto(){
         try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
+            bw.write("");
+            bw.close();
+
             ObjectOutputStream fichero = new ObjectOutputStream(new FileOutputStream(ruta));
             fichero.writeObject(proyecto);
             fichero.close();
