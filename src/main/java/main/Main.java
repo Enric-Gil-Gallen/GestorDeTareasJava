@@ -29,7 +29,6 @@ public class Main implements Serializable{
     static boolean activo = true;
     static int opcion;
     static String ruta = "src/main/java/main/ficheros/proyecto.bin";
-    private static final long serialVersionUID = -1065341850225848464L;
     static Proyecto proyecto = null;
 
     public static void main(String[] args) {
@@ -77,11 +76,11 @@ public class Main implements Serializable{
                     break;
 
                 case 8:
-                    System.out.println(proyecto.personasSinTareas());
+
                     break;
 
                 case 9:
-                    System.out.println(proyecto.tareasSinAsignar());
+
                     break;
 
                 case 10:
@@ -597,9 +596,7 @@ public class Main implements Serializable{
 
     //Opcion 8 -- Listar personas que no son responsables de ninguna tarea
 
-
     //Opcion 9 -- Obtener un listado de tareas que no tienen ninguna persona asignada
-
 
     // Opcion 10 -- Salir
     public static void guardarProyecto(){

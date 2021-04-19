@@ -1,11 +1,13 @@
 package datos;
 
+import datos.interfaces.tieneClave;
+import datos.interfaces.tieneLista;
+
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Tarea implements Serializable {
+public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<String> {
     private String titulo; // Tiene que ser unico, es el ID
     private String descripcion;
     private LinkedList<Persona> personas;
@@ -139,5 +141,14 @@ public class Tarea implements Serializable {
         }
     }
 
+    @Override
+    public String getClave() {
+        return titulo;
+    }
+
+    @Override
+    public LinkedList<Persona> getLista() {
+        return personas;
+    }
 }
 

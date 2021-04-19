@@ -3,6 +3,8 @@ package datos;
 import datos.Persona;
 import datos.Resultado;
 import datos.Tarea;
+import datos.interfaces.tieneClave;
+import datos.interfaces.tieneLista;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -100,36 +102,6 @@ public class Proyecto implements Serializable{
         }
     }
 
-    //Método para personas que no tienen ninguna tarea asignada
-    public String personasSinTareas(){
-        if (personas.isEmpty()){
-            return "No hay personas en el proyecto actual";
-        } else {
-            String personasSinTareasAsignadas = "";
-            for (Persona persona : personas){
-                if (persona.getPersonaSinTareas() == true){
-                    personasSinTareasAsignadas += " " + persona.getNombre() + ",";
-                }
-            }
-            return personasSinTareasAsignadas;
-        }
-    }
-
-    //Método para tareas que no tienen ninguna persona asignada
-    public String tareasSinAsignar(){
-        if (tareas.isEmpty()){
-            return "No hay tareas en el proyecto actual";
-        } else {
-            String tareasNoAsignadas = "";
-            for (Tarea tarea : tareas){
-                if (tarea.getTareaSinPersonas() == true){
-                    tareasNoAsignadas += " " + tarea.getTitulo() + ",";
-                }
-            }
-            return tareasNoAsignadas;
-        }
-    }
-
     public void eliminarPersona(Persona persona){
         personas.remove(persona);
     }
@@ -144,21 +116,7 @@ public class Proyecto implements Serializable{
         return resul;
     }
 
-    public void setPersonas(LinkedList<Persona> personas) {
-        this.personas = personas;
-    }
 
-    public void setTareas(LinkedList<Tarea> tareas) {
-        this.tareas = tareas;
-    }
-
-    public void setResultados(LinkedList<Resultado> resultados) {
-        this.resultados = resultados;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 }
 
 

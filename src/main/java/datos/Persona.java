@@ -1,5 +1,8 @@
 package datos;
 
+import datos.interfaces.tieneClave;
+import datos.interfaces.tieneLista;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,5 +50,4 @@ public class Persona implements Serializable {
             return false;
         }
     }
-
 }
