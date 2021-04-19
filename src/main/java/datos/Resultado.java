@@ -1,6 +1,8 @@
 package datos;
 
-public abstract class Resultado {
+import java.io.Serializable;
+
+public abstract class Resultado implements Serializable {
     private int id;
     private double horas_totolal;
     private Enum tipo_Int_Ext;

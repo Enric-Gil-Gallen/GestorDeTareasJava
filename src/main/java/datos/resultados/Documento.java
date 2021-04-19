@@ -2,7 +2,9 @@ package datos.resultados;
 
 import datos.Resultado;
 
-public class Documento extends Resultado {
+import java.io.Serializable;
+
+public class Documento extends Resultado implements Serializable {
     private int num_paguinas;
     private int num_modulos;
 

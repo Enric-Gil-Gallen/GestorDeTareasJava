@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Proyecto implements Serializable {
+public class Proyecto implements Serializable{
     // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
     private LinkedList<Persona> personas = new LinkedList();
     private LinkedList<Tarea> tareas = new LinkedList();
@@ -111,6 +111,22 @@ public class Proyecto implements Serializable {
             }
         }
         return resul;
+    }
+
+    public void setPersonas(LinkedList<Persona> personas) {
+        this.personas = personas;
+    }
+
+    public void setTareas(LinkedList<Tarea> tareas) {
+        this.tareas = tareas;
+    }
+
+    public void setResultados(LinkedList<Resultado> resultados) {
+        this.resultados = resultados;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
 

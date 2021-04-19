@@ -1,10 +1,11 @@
 package datos;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Tarea {
+public class Tarea implements Serializable {
     private String titulo; // Tiene que ser unico, es el ID
     private String descripcion;
     private LinkedList<Persona> personas;

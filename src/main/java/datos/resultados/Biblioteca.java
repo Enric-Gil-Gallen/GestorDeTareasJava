@@ -2,7 +2,9 @@ package datos.resultados;
 
 import datos.Resultado;
 
-public class Biblioteca extends Resultado {
+import java.io.Serializable;
+
+public class Biblioteca extends Resultado implements Serializable {
     private int num_lineas;
     private int num_modulos;
 

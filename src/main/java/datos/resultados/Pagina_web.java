@@ -2,7 +2,9 @@ package datos.resultados;
 
 import datos.Resultado;
 
-public class Pagina_web extends Resultado {
+import java.io.Serializable;
+
+public class Pagina_web extends Resultado implements Serializable {
     private Enum estado;
     private String back_tipo;
 

@@ -1,10 +1,11 @@
 package datos;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Persona {
+public class Persona implements Serializable {
     private String nombre;
     private String email;
     private LinkedList<Tarea> tareas_lista;

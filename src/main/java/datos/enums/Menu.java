@@ -1,6 +1,8 @@
 package datos.enums;
 
-public enum Menu {
+import java.io.Serializable;
+
+public enum Menu implements Serializable {
     NUEVO_PROYECTO_CON_NOMBRE("Iniciar un nuevo proyecto y dale nombre"),
     PERSONAS_EN_PROYECTO("Dar de alta a las personas que trabajan en el proyecto"),
     TAREAS_CON_DATOS("Dar de alta las tareas con sus datos"),

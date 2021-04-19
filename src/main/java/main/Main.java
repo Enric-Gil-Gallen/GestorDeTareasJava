@@ -10,7 +10,6 @@ import datos.resultados.Pagina_web;
 import datos.resultados.Programa;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -35,9 +34,8 @@ public class Main implements Serializable{
 
     public static void main(String[] args) {
         System.out.println("\nBienvenido al gestor que tareas");
-
         if (existeProyectoAnterir(ruta)){
-            System.out.println("\nSe ha cargardo un Proyecto Anterior");
+            System.out.println("Se ha cargardo un Proyecto Anterior\n");
             cargarProyecto();
         }
         else {
@@ -123,14 +121,16 @@ public class Main implements Serializable{
     // Metodo que pide por pantalla
     public static String pedirDato(String nombreDato) {
         String resul = "";
-        while (resul.isEmpty()){
+        while (true){
             System.out.println(nombreDato + ": ");
             resul = scaner.nextLine();
-            if (resul.isEmpty()){
+            if (resul.equals("")){
                 System.out.println("No puedes introducir el campo vacio\n");
             }
+            else {
+                return resul;
+            }
         }
-        return resul;
     }
 
     // Dice si un numero esta en un rango correcto
@@ -414,9 +414,9 @@ public class Main implements Serializable{
     public static void cargarProyecto(){
         try {
             ObjectInputStream fichero = new ObjectInputStream(new FileInputStream(ruta));
-            proyecto = (Proyecto) fichero.readObject();
-
+            proyecto = (Proyecto)fichero.readObject();
             fichero.close();
+
         }
         catch (IOException e){
             System.out.println("No exite el fichero: " + ruta);
@@ -425,6 +425,7 @@ public class Main implements Serializable{
             System.out.println("No se ha podido cargar el proyecto");
             proyecto = new Proyecto(pedirDato("Nombre Proyecto"));
         }
+
     }
 
     // Opción 1 -- Nuevo proyecto
@@ -440,6 +441,7 @@ public class Main implements Serializable{
             String num = pedirDato(" ¿Que quieres hacer ?\n" +
                     "\t1 - Introducir persona\n" +
                     "\tCualquier otra tecla - Finalizar");
+            System.out.println(num + " ññññññññññññññññññññññññ");
             try {
                 if (Integer.parseInt(num) == 1) {
                     proyecto.añadirPersonas(añadirPersona(proyecto));
@@ -592,9 +594,7 @@ public class Main implements Serializable{
     public static void guardarProyecto(){
         try{
             ObjectOutputStream fichero = new ObjectOutputStream(new FileOutputStream(ruta));
-
             fichero.writeObject(proyecto);
-
             fichero.close();
         }catch (Exception e){
             System.out.println("El fichero no existe");

@@ -1,6 +1,8 @@
 package datos.enums;
 
-public enum Interno_Externo {
+import java.io.Serializable;
+
+public enum Interno_Externo implements Serializable {
     INTERNO("Interno"),
     EXTERNO("Externo");
 
