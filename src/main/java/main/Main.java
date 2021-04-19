@@ -18,7 +18,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Main {
+public class Main implements Serializable{
 
     // Patrón para validar el email
     static Pattern pattern = Pattern
@@ -29,14 +29,21 @@ public class Main {
     static Scanner scaner = new Scanner(System.in);
     static boolean activo = true;
     static int opcion;
-    static String ruta = "src/main/java/main/txt/";
-    static Proyecto proyecto = new Proyecto(pedirDato("Nombre Proyecto"));
-
+    static String ruta = "src/main/java/main/ficheros/proyecto.bin";
+    private static final long serialVersionUID = -1065341850225848464L;
+    static Proyecto proyecto = null;
 
     public static void main(String[] args) {
-
         System.out.println("\nBienvenido al gestor que tareas");
-        System.out.println("¿ Cual va a ser el nombre del proyecto ?");
+
+        if (existeProyectoAnterir(ruta)){
+            System.out.println("\nSe ha cargardo un Proyecto Anterior");
+            cargarProyecto();
+        }
+        else {
+            System.out.println("No habia ningun proyecto guardado con anterioridad");
+            proyecto = new Proyecto(pedirDato("Nombre Proyecto"));
+        }
 
         //Menu infinito hasta que se pulse la tecla 7
         boolean salir = true;
@@ -74,6 +81,7 @@ public class Main {
                 case 8:
                     scaner.close();
                     salir = false;
+                    guardarProyecto();
                     break;
 
                 default:
@@ -174,8 +182,6 @@ public class Main {
                             nombre_no_repe = true;
                         }
                     }
-
-
                     if (nombre_no_repe) {
                         System.out.println("Este email ya esta registrado, porfavor pruebe otro.\n");
                     }
@@ -394,8 +400,32 @@ public class Main {
         return false;
     }
 
+    public static boolean existeProyectoAnterir(String ruta){
+        File archiv = new File("src/main/java/main/ficheros/proyecto.bin");
+        if (archiv.exists()){
+            return true;
+        }
+        return false;
+    }
 
     // METODOS POR CADA OPCION DEL MANU
+
+    // Opcion 0 -- Cargar Proyecto
+    public static void cargarProyecto(){
+        try {
+            ObjectInputStream fichero = new ObjectInputStream(new FileInputStream(ruta));
+            proyecto = (Proyecto) fichero.readObject();
+
+            fichero.close();
+        }
+        catch (IOException e){
+            System.out.println("No exite el fichero: " + ruta);
+        }
+        catch (ClassNotFoundException e){
+            System.out.println("No se ha podido cargar el proyecto");
+            proyecto = new Proyecto(pedirDato("Nombre Proyecto"));
+        }
+    }
 
     // Opción 1 -- Nuevo proyecto
     public static void nuevoProyecto(){
@@ -556,6 +586,19 @@ public class Main {
 
         }
 
+    }
+
+    // Opcion 8 -- Salir
+    public static void guardarProyecto(){
+        try{
+            ObjectOutputStream fichero = new ObjectOutputStream(new FileOutputStream(ruta));
+
+            fichero.writeObject(proyecto);
+
+            fichero.close();
+        }catch (Exception e){
+            System.out.println("El fichero no existe");
+        }
     }
 }
 

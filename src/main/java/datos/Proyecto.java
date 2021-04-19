@@ -4,11 +4,12 @@ import datos.Persona;
 import datos.Resultado;
 import datos.Tarea;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Proyecto {
+public class Proyecto implements Serializable {
     // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
     private LinkedList<Persona> personas = new LinkedList();
     private LinkedList<Tarea> tareas = new LinkedList();
