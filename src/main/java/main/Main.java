@@ -76,11 +76,11 @@ public class Main implements Serializable{
                     break;
 
                 case 8:
-
+                    System.out.println(proyecto.personasSinTareas());
                     break;
 
                 case 9:
-                    tareasSinPersonaAsignada();
+                    System.out.println(proyecto.tareasSinAsignar());
                     break;
 
                 case 10:
