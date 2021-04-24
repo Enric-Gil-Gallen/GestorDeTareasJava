@@ -4,6 +4,10 @@ import datos.*;
 import datos.enums.Estado;
 import datos.enums.Interno_Externo;
 import datos.enums.Menu;
+import datos.facturacion_Tipos.ConsumoInterno;
+import datos.facturacion_Tipos.Descuento;
+import datos.facturacion_Tipos.Normal;
+import datos.facturacion_Tipos.Urgente;
 import datos.resultados.Biblioteca;
 import datos.resultados.Documento;
 import datos.resultados.Pagina_web;
@@ -405,6 +409,28 @@ public class Main implements Serializable{
         return false;
     }
 
+    public static int pedirCoste(){
+        return pedirNumero("Coste");
+    }
+
+    public static Facturacion pedirFacturacion(){
+    int opcion = pedirNumeroEnRango(1, 2, "¿ Que tipo de facturacion se necesita ? \n\t1 - Urgente\n\t2 - Descuento\n\t3 - Consimo Interno\n\t4 - Normal");
+        switch (opcion){
+            case 1:
+                return new Urgente();
+
+            case 2:
+                return new Descuento();
+
+            case 3:
+                return new ConsumoInterno();
+
+            case 4:
+                return new Normal();
+        }
+        return new Normal();
+    }
+    //Control de ficheros
     public static boolean existeProyectoAnterir(String ruta){
         File archiv = new File("src/main/java/main/ficheros/proyecto.bin");
         if (archiv.exists()){
@@ -412,6 +438,8 @@ public class Main implements Serializable{
         }
         return false;
     }
+
+
 
     // METODOS POR CADA OPCION DEL MANU
 
@@ -510,8 +538,14 @@ public class Main implements Serializable{
                     // ETIQUETAS
                     LinkedList<String> etiquetas =  tareaEtiquetas();
 
+                    // COSTE
+                    int coste = pedirCoste();
+
+                    // FACTURACION
+                    Facturacion facturacion = pedirFacturacion();
+
                     // AÑADIR LAS TAREAS
-                    Tarea tarea = new Tarea(titulo, descripcion, personas_tarea, persona_responsable, prioridad, fechaCreacion, fechaFinalizacion, tareaFinalizada, resultado, etiquetas);
+                    Tarea tarea = new Tarea(titulo, descripcion, personas_tarea, persona_responsable, prioridad, fechaCreacion, fechaFinalizacion, tareaFinalizada, resultado, etiquetas, coste, facturacion);
                     proyecto.añadirTarea(tarea);
 
                     // AÑADIR EL RESULTADO A TODOS LOS RESULTADOS

@@ -1,5 +1,6 @@
 package datos;
 
+import datos.facturacion_Tipos.Normal;
 import junit.framework.TestCase;
 
 import java.util.LinkedList;
@@ -9,7 +10,7 @@ public class ProyectoTest extends TestCase {
     public void testMarcarComoFinalizado() {
         // Creacion de los datos necesarios
         Proyecto proyecto = new Proyecto("Ejemplo");
-        Tarea tarea = new Tarea("Ejemplo", "descripcion", null, null, 1, null, null, false, null, null);
+        Tarea tarea = new Tarea("Ejemplo", "descripcion", null, null, 1, null, null, false, null, null, 0,null);
 
         // Añadir la tarea con el valor false
         proyecto.añadirTarea(tarea);
@@ -31,7 +32,5 @@ public class ProyectoTest extends TestCase {
         }
         assertTrue(flag);
     }
-
-
 
 }

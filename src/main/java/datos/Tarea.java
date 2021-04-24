@@ -18,8 +18,10 @@ public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<Stri
     private Boolean tarea_Finalizada;
     private Resultado resultado_Esperado;
     private LinkedList<String> etiquetas;
+    private double coste;
+    private Facturacion facturacion;
 
-    public Tarea(String titulo, String descripcion, LinkedList<Persona> personas, Persona responsable_Tarea, int prioridad, Date fecha_Creacion, Date fecha_Finalizacion, Boolean tarea_Finalizada, Resultado resultado_Esperado, LinkedList etiquetas) {
+    public Tarea(String titulo, String descripcion, LinkedList<Persona> personas, Persona responsable_Tarea, int prioridad, Date fecha_Creacion, Date fecha_Finalizacion, Boolean tarea_Finalizada, Resultado resultado_Esperado, LinkedList<String> etiquetas, double coste, Facturacion facturacion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.personas = personas;
@@ -30,6 +32,8 @@ public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<Stri
         this.tarea_Finalizada = tarea_Finalizada;
         this.resultado_Esperado = resultado_Esperado;
         this.etiquetas = etiquetas;
+        this.coste = coste;
+        this.facturacion = facturacion;
     }
 
     // Geters
@@ -62,7 +66,7 @@ public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<Stri
     }
 
     public String getPersonasYResponsable(){
-        if (personas.isEmpty()){
+        if ( personas == null||personas.isEmpty()){
             return "La tarea no tiene ninguna persona registrada";
         }
         else {
@@ -139,6 +143,82 @@ public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<Stri
         } else {
             return false;
         }
+    }
+
+    public Facturacion getFacturacion() {
+        return facturacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Persona getResponsable_Tarea() {
+        return responsable_Tarea;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public Date getFecha_Creacion() {
+        return fecha_Creacion;
+    }
+
+    public Date getFecha_Finalizacion() {
+        return fecha_Finalizacion;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setPersonas(LinkedList<Persona> personas) {
+        this.personas = personas;
+    }
+
+    public void setResponsable_Tarea(Persona responsable_Tarea) {
+        this.responsable_Tarea = responsable_Tarea;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    public void setFecha_Creacion(Date fecha_Creacion) {
+        this.fecha_Creacion = fecha_Creacion;
+    }
+
+    public void setFecha_Finalizacion(Date fecha_Finalizacion) {
+        this.fecha_Finalizacion = fecha_Finalizacion;
+    }
+
+    public void setResultado_Esperado(Resultado resultado_Esperado) {
+        this.resultado_Esperado = resultado_Esperado;
+    }
+
+    public void setEtiquetas(LinkedList<String> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
+
+    public void setCoste(double coste) {
+        this.coste = coste;
+    }
+
+    public void setFacturacion(Facturacion facturacion) {
+        this.facturacion = facturacion;
+    }
+
+    public LinkedList<String> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public double getCoste() {
+        return coste;
     }
 
     @Override

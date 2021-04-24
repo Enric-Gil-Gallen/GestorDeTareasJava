@@ -78,7 +78,7 @@ public class Proyecto implements Serializable{
 
     //Método para listar las tareas de un proyecto dado
     public String tareasDelProyecto (){
-        if (tareas.isEmpty()){
+        if (tareas == null || tareas.isEmpty()){
             return  "No hay ninguna tarea registrada el en proyecto";
         }
         else {
@@ -96,7 +96,9 @@ public class Proyecto implements Serializable{
                     sb.append("La tarea no esta finalizada \n");
                 }
                 sb.append(tarea.getResultado_Esperado().getResultadoyInformacion());
-                sb.append("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
+                sb.append("Tipo de facturacion: " +tarea.getFacturacion().getNombre());
+                sb.append("\n\t - Precio de la factura: "+ tarea.getFacturacion().calcularFacturacion(tarea.getCoste())+ "€");
+                sb.append("\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
             }
             return sb.toString();
         }
@@ -147,5 +149,3 @@ public class Proyecto implements Serializable{
     }
 
 }
-
-
