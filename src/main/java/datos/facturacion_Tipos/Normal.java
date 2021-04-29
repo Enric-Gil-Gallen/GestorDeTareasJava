@@ -9,7 +9,7 @@ public class Normal implements Facturacion {
     }
 
     @Override
-    public int calcularFacturacion(double coste) {
-        return (int) (coste*1.1);
+    public double calcularFacturacion(double coste, double añadido) {
+        return coste *1.21;
     }
 }

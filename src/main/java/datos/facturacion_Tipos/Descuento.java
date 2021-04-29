@@ -2,6 +2,8 @@ package datos.facturacion_Tipos;
 
 import datos.Facturacion;
 
+import java.util.Scanner;
+
 public class Descuento implements Facturacion {
     @Override
     public String getNombre() {
@@ -9,7 +11,8 @@ public class Descuento implements Facturacion {
     }
 
     @Override
-    public int calcularFacturacion(double coste) {
-        return (int) (coste*0.8);
+    public double calcularFacturacion(double coste, double añadido) {
+        return coste * (añadido/100) *1.21;
     }
+
 }

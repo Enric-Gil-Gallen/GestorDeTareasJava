@@ -1,7 +1,6 @@
-package datos.interfaces;
+package datos.metodosGenericos;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public interface tieneLista<E> {
     LinkedList<E> getLista();

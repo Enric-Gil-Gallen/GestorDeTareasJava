@@ -4,7 +4,6 @@ import datos.*;
 import datos.enums.Estado;
 import datos.enums.Interno_Externo;
 import datos.enums.Menu;
-import datos.facturacion_Tipos.ConsumoInterno;
 import datos.facturacion_Tipos.Descuento;
 import datos.facturacion_Tipos.Normal;
 import datos.facturacion_Tipos.Urgente;
@@ -34,6 +33,7 @@ public class Main implements Serializable{
     static int opcion;
     static String ruta = "src/main/java/main/ficheros/proyecto.bin";
     static Proyecto proyecto = null;
+    static double valor = 0;
 
     public static void main(String[] args) {
         System.out.println("\nBienvenido al gestor que tareas");
@@ -129,6 +129,17 @@ public class Main implements Serializable{
         return opcion;
     }
 
+    public static double pedirNumeroDouble(String palabra){
+        // Llamadas en Enum --> menu
+        System.out.println(palabra);
+        scaner = new Scanner(System.in);
+        double opcion = 0;
+
+        // Comprobar que el numero sea el indicado
+        opcion = comprobarQueEsUnNumero(); // Comprobamos que sea un numero lo que nos pasan
+
+        return opcion;
+    }
     // Metodo que pide por pantalla
     public static String pedirDato(String nombreDato) {
         String resul = "";
@@ -409,24 +420,23 @@ public class Main implements Serializable{
         return false;
     }
 
-    public static int pedirCoste(){
-        return pedirNumero("Coste");
-    }
-
     public static Facturacion pedirFacturacion(){
-    int opcion = pedirNumeroEnRango(1, 2, "¿ Que tipo de facturacion se necesita ? \n\t1 - Urgente\n\t2 - Descuento\n\t3 - Consimo Interno\n\t4 - Normal");
+
+        int opcion = pedirNumeroEnRango(1, 2, "¿ Que tipo de facturacion se necesita ? \n\t1 - Urgente\n\t2 - Descuento\n\t3 - Normal");
         switch (opcion){
             case 1:
+                valor = pedirNumeroEnRango(1, 100, "Que porcentaje se incrementa el coste ? \n" +
+                        "\t Introduce un numero del 1 al 100" );
                 return new Urgente();
 
             case 2:
+                valor = pedirNumeroEnRango(1, 100, "Que porcentaje se incrementa el coste ? \n" +
+                        "\t Introduce un numero del 1 al 100" );
                 return new Descuento();
 
             case 3:
-                return new ConsumoInterno();
-
-            case 4:
-                return new Normal();
+                valor = 0;
+            return new Normal();
         }
         return new Normal();
     }
@@ -539,13 +549,13 @@ public class Main implements Serializable{
                     LinkedList<String> etiquetas =  tareaEtiquetas();
 
                     // COSTE
-                    int coste = pedirCoste();
+                    double coste = pedirNumeroDouble("Coste");
 
                     // FACTURACION
                     Facturacion facturacion = pedirFacturacion();
 
                     // AÑADIR LAS TAREAS
-                    Tarea tarea = new Tarea(titulo, descripcion, personas_tarea, persona_responsable, prioridad, fechaCreacion, fechaFinalizacion, tareaFinalizada, resultado, etiquetas, coste, facturacion);
+                    Tarea tarea = new Tarea(titulo, descripcion, personas_tarea, persona_responsable, prioridad, fechaCreacion, fechaFinalizacion, tareaFinalizada, resultado, etiquetas, coste, facturacion, valor);
                     proyecto.añadirTarea(tarea);
 
                     // AÑADIR EL RESULTADO A TODOS LOS RESULTADOS

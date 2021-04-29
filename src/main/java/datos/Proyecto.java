@@ -1,16 +1,7 @@
 package datos;
 
-import datos.Persona;
-import datos.Resultado;
-import datos.Tarea;
-import datos.interfaces.tieneClave;
-import datos.interfaces.tieneLista;
-
 import java.io.Serializable;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Proyecto implements Serializable{
     // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
@@ -97,7 +88,7 @@ public class Proyecto implements Serializable{
                 }
                 sb.append(tarea.getResultado_Esperado().getResultadoyInformacion());
                 sb.append("Tipo de facturacion: " +tarea.getFacturacion().getNombre());
-                sb.append("\n\t - Precio de la factura: "+ tarea.getFacturacion().calcularFacturacion(tarea.getCoste())+ "€");
+                sb.append("\n\t - Precio de la factura: "+ tarea.cojerFacturacion()+ "€");
                 sb.append("\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
             }
             return sb.toString();

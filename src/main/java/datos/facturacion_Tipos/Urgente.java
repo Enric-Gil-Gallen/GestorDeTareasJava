@@ -9,7 +9,7 @@ public class Urgente implements Facturacion {
     }
 
     @Override
-    public int calcularFacturacion(double coste) {
-        return (int) (coste*1.8);
+    public double calcularFacturacion(double coste, double añadido) {
+        return ((coste * (añadido/100) + coste )*1.21);
     }
 }

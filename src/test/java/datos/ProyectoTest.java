@@ -10,7 +10,7 @@ public class ProyectoTest extends TestCase {
     public void testMarcarComoFinalizado() {
         // Creacion de los datos necesarios
         Proyecto proyecto = new Proyecto("Ejemplo");
-        Tarea tarea = new Tarea("Ejemplo", "descripcion", null, null, 1, null, null, false, null, null, 0,null);
+        Tarea tarea = new Tarea("Ejemplo", "descripcion", null, null, 1, null, null, false, null, null, 0,null,0);
 
         // Añadir la tarea con el valor false
         proyecto.añadirTarea(tarea);
