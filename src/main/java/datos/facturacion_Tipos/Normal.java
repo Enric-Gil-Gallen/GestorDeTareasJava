@@ -2,7 +2,9 @@ package datos.facturacion_Tipos;
 
 import datos.Facturacion;
 
-public class Normal implements Facturacion {
+import java.io.Serializable;
+
+public class Normal implements Facturacion, Serializable {
     @Override
     public String getNombre() {
         return "Normal";
