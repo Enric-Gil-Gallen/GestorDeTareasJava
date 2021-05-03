@@ -1,8 +1,10 @@
 package datos;
 
+import datos.metodosGenericos.tieneClave;
+
 import java.io.Serializable;
 
-public abstract class Resultado implements Serializable {
+public abstract class Resultado implements Serializable, tieneClave {
     private int id;
     private double horas_totolal;
     private Enum tipo_Int_Ext;
@@ -34,4 +36,9 @@ public abstract class Resultado implements Serializable {
         return sb.toString();
     }
 
+
+    @Override
+    public String getClave() {
+        return id+"";
+    }
 }

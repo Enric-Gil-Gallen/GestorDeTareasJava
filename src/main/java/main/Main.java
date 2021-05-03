@@ -486,7 +486,13 @@ public class Main implements Serializable{
                     "\tCualquier otra tecla - Finalizar");
             try {
                 if (Integer.parseInt(num) == 1) {
-                    proyecto.añadirPersonas(añadirPersona(proyecto));
+                    if (proyecto.añadirPersonas(añadirPersona(proyecto))){
+                        System.out.println("La personsa se ha creado correctamente");
+                    }
+                    else {
+                        System.out.println("Ha ocurirrido un fallo en la cracion de la Persona");
+                    }
+
                 } else {
                     break;
                 }
@@ -556,10 +562,20 @@ public class Main implements Serializable{
 
                     // AÑADIR LAS TAREAS
                     Tarea tarea = new Tarea(titulo, descripcion, personas_tarea, persona_responsable, prioridad, fechaCreacion, fechaFinalizacion, tareaFinalizada, resultado, etiquetas, coste, facturacion, valor);
-                    proyecto.añadirTarea(tarea);
+                    if (proyecto.añadirTarea(tarea)){
+                        System.out.println("La tarea se ha creado correctamente");
+                    }
+                    else {
+                        System.out.println("Ha ocurirrido un fallo en la cracion de la Tarea");
+                    }
 
                     // AÑADIR EL RESULTADO A TODOS LOS RESULTADOS
-                    proyecto.añadirResultado(resultado);
+                    if (proyecto.añadirResultado(resultado)){
+                        System.out.println("El resultado se ha creado correctamente");
+                    }
+                    else {
+                        System.out.println("Ha ocurirrido un fallo en la cracion del resultado");
+                    }
 
                     // AÑADIR LA TAREA A LAS PERSONAS REGISTRADAS
                     if (personas_tarea != null && !personas_tarea.isEmpty()){

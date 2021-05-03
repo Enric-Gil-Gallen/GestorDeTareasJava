@@ -3,7 +3,7 @@ package datos;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Proyecto implements Serializable{
+public class Proyecto extends utilidadesParaListas implements Serializable {
     // Para guardar la informacion de momento usaremos LinkedList de la 3 clases principales
     private LinkedList<Persona> personas = new LinkedList();
     private LinkedList<Tarea> tareas = new LinkedList();
@@ -22,17 +22,29 @@ public class Proyecto implements Serializable{
         return tareas;
     }
 
-    // Metodos usados por el menu "principalmente"
-    public void añadirPersonas(Persona persona){
+    //    // Metodos usados por el menu "principalmente"
+    public boolean añadirPersonas(Persona persona){
+        if (puedeInsertar(persona, this.personas)){
             personas.add(persona);
+            return true;
+        }
+        return false;
     }
 
-    public void añadirTarea(Tarea tarea){
-        tareas.add(tarea);
+    public boolean añadirTarea(Tarea tarea){
+        if (puedeInsertar(tarea, tareas)){
+            tareas.add(tarea);
+            return true;
+        }
+        return false;
     }
 
-    public void añadirResultado(Resultado resultado){
-        resultados.add(resultado);
+    public boolean añadirResultado(Resultado resultado){
+        if (puedeInsertar(resultado, resultados)){
+            resultados.add(resultado);
+            return true;
+        }
+        return false;
     }
     public Tarea buscarTareaPorTitulo(String titulo){
         for (Tarea tarea: tareas){
@@ -45,10 +57,6 @@ public class Proyecto implements Serializable{
 
     public LinkedList<Resultado> getResultados() {
         return resultados;
-    }
-
-    public String getNombre() {
-        return nombre;
     }
 
     //Método que devuelve las personas implicadas en el proyecto
@@ -114,13 +122,13 @@ public class Proyecto implements Serializable{
         if (personas.isEmpty()){
             return "No hay personas en el proyecto actual";
         } else {
-            String personasSinTareasAsignadas = "";
-            for (Persona persona : personas){
-                if (persona.getPersonaSinTareas() == true){
-                    personasSinTareasAsignadas += " " + persona.getNombre() + ",";
-                }
+            StringBuilder sb = new StringBuilder();
+            LinkedList<Persona> lista = (LinkedList<Persona>) elemntosConListaVacia(personas);
+            for (Persona persona : lista){
+                sb.append(persona.getNombre());
+                sb.append("\n");
             }
-            return personasSinTareasAsignadas;
+            return sb.toString();
         }
     }
 
@@ -129,13 +137,13 @@ public class Proyecto implements Serializable{
         if (tareas.isEmpty()){
             return "No hay tareas en el proyecto actual";
         } else {
-            String tareasNoAsignadas = "";
-            for (Tarea tarea : tareas){
-                if (tarea.getTareaSinPersonas() == true){
-                    tareasNoAsignadas += " " + tarea.getTitulo() + ",";
-                }
+            StringBuilder sb = new StringBuilder();
+            LinkedList<Tarea> lista = (LinkedList<Tarea>) elemntosConListaVacia(tareas);
+            for (Tarea tarea : lista){
+                sb.append(tarea.getTitulo());
+                sb.append("\n");
             }
-            return tareasNoAsignadas;
+            return sb.toString();
         }
     }
 

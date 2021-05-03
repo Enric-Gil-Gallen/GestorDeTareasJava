@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<String> {
+public class Tarea implements Serializable, tieneClave, tieneLista{
     private String titulo; // Tiene que ser unico, es el ID
     private String descripcion;
     private LinkedList<Persona> personas;
@@ -58,6 +58,14 @@ public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<Stri
     // Seters
     public void setTarea_Finalizada(Boolean tarea_Finalizada) {
         this.tarea_Finalizada = tarea_Finalizada;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setFacturacion(Facturacion facturacion) {
+        this.facturacion = facturacion;
     }
 
     // Otros metodos
@@ -151,24 +159,8 @@ public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<Stri
         return facturacion;
     }
 
-    public void setFacturacion(Facturacion facturacion) {
-        this.facturacion = facturacion;
-    }
-
-    public LinkedList<String> getEtiquetas() {
-        return etiquetas;
-    }
-
-    public double getCoste() {
-        return coste;
-    }
-
     public double cojerFacturacion(){
         return facturacion.calcularFacturacion(coste, valor);
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 
     @Override
@@ -177,7 +169,7 @@ public class Tarea implements Serializable, tieneLista<Persona>, tieneClave<Stri
     }
 
     @Override
-    public LinkedList<Persona> getLista() {
+    public LinkedList getLista() {
         return personas;
     }
 }

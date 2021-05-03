@@ -8,7 +8,7 @@ import java.util.List;
 
 public class utilidadesParaListas{
 
-     public static <T extends tieneLista<E>, E> List<T> elemntosConListaVacia(List<T> list){
+     public static <T extends tieneLista<E>, E> List<T> elemntosConListaVacia(LinkedList<T> list){
         List<T> sol = new LinkedList<>();
          for (T elem: list){
             if (elem.getLista().size()==0) sol.add(elem);
@@ -16,9 +16,9 @@ public class utilidadesParaListas{
          return sol;
     }
 
-    public static <E extends tieneClave<E>> boolean puedeInsertar(E elemento, List<E> lista){
+    public static <E extends tieneClave<E>> boolean puedeInsertar(E elemento, LinkedList<E> lista){
         for (E objeto:lista){
-            if (objeto.getClave().equals(elemento.getClave())) return false;
+            if (objeto.getClave() == (elemento.getClave())) return false;
         }
         return true;
     }

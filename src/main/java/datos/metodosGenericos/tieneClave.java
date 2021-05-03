@@ -1,5 +1,5 @@
 package datos.metodosGenericos;
 
-public interface tieneClave<T> {
-    T getClave();
+public interface tieneClave<String> {
+    String getClave();
 }

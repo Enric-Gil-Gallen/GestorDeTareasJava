@@ -1,9 +1,12 @@
 package datos;
 
+import datos.metodosGenericos.tieneClave;
+import datos.metodosGenericos.tieneLista;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Persona implements Serializable {
+public class Persona implements Serializable, tieneClave, tieneLista {
     private String nombre;
     private String email;
     private LinkedList<Tarea> tareas_lista;
@@ -28,21 +31,19 @@ public class Persona implements Serializable {
         return email;
     }
 
-    public LinkedList<Tarea> getTareas_lista() {
-        return tareas_lista;
-    }
-
     public void cargarTarea(Tarea tarea){
         if(!tareas_lista.contains(tarea)){
             tareas_lista.add(tarea);
         }
     }
 
-    public boolean getPersonaSinTareas(){
-        if(tareas_lista.isEmpty()){
-            return true;
-        } else {
-            return false;
-        }
+    @Override
+    public String getClave() {
+        return email;
+    }
+
+    @Override
+    public LinkedList getLista() {
+        return tareas_lista;
     }
 }
